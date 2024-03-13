@@ -1,0 +1,25 @@
+
+.footer-text{
+    text-align: center;
+    padding-left: 10%;
+    padding-right: 10%;
+    font-family: Arial, sans-serif;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    height: 10%;
+  }
+  
+  .ellipse {
+    width: 110%;
+    background-color: #EBE9D6;
+    border-radius: 100% 100% 0 0;
+    margin-left: -5%;
+    margin-right: -5%;
+  }
+
