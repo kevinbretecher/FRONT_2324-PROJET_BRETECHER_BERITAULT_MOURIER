@@ -1,0 +1,14 @@
+.header-container {
+    background-color: #EBE9D6;
+    height: 70px;
+    width: auto;
+}
+
+.header{
+    height: 123px;
+}
+
+.logo {
+    margin: auto;
+    display: block;
+}
