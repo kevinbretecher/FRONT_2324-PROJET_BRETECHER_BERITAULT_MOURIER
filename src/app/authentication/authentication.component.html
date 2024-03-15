@@ -1,0 +1,91 @@
+<body>
+    <app-header></app-header>
+    <div class="main-wrapper">
+        <div class="wrapper">
+            <div class="computer">
+                <div class="card">
+                    <div class="card-header">
+                      Inscription
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="wrap-form-group">
+                                <div class="column-form-group">
+                                    <div class="form-group">
+                                        <label for="firstname">Prénom</label>
+                                        <input type="text" id="firstname" name="firstname" required placeholder="Entrez votre prénom">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Adresse mail</label>
+                                        <input type="email" id="email" name="email" required placeholder="Entrez votre mail">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="username">Nom d'utilisateur</label>
+                                        <input type="text" id="username" name="username" required placeholder="Entrez votre nom d'utilisateur">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">Mot de passe</label>
+                                        <input type="password" id="password" name="password" required placeholder="Entrez votre mot de passe">
+                                    </div>
+                                </div>
+                                <div class="column-form-group">
+                                    <div class="form-group">
+                                        <label for="name">Nom</label>
+                                        <input type="text" id="name" name="name" required placeholder="Entrez votre nom">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="birthdate">Date de naissance</label>
+                                        <input type="date" id="birthdate" name="birthdate" required placeholder="Entrez votre date de naissance">
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit">S'inscrire</button>
+                      </form>
+                    </div>
+                </div>
+            </div>
+            <div class="smartphone">
+                <div class="card">
+                    <div class="card-header">
+                      Inscription
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="wrap-form-group">
+                                <div class="column-form-group">
+                                    <div class="form-group">
+                                        <label for="firstname">Prénom</label>
+                                        <input type="text" id="firstname" name="firstname" required placeholder="Entrez votre prénom">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Nom</label>
+                                        <input type="text" id="name" name="name" required placeholder="Entrez votre nom">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Adresse mail</label>
+                                        <input type="email" id="email" name="email" required placeholder="Entrez votre mail">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="birthdate">Date de naissance</label>
+                                        <input type="date" id="birthdate" name="birthdate" required placeholder="Entrez votre date de naissance">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="username">Nom d'utilisateur</label>
+                                        <input type="text" id="username" name="username" required placeholder="Entrez votre nom d'utilisateur">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">Mot de passe</label>
+                                        <input type="password" id="password" name="password" required placeholder="Entrez votre mot de passe">
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit">S'inscrire</button>
+                      </form>
+                    </div>
+                </div>
+            </div>
+            <a routerLink="/home" class="create-account-button">Abandonner</a>
+        </div>
+    </div>
+    <app-footer></app-footer>
+</body>
