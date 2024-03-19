@@ -7,12 +7,14 @@ import { AppComponent } from './app.component';
 import { AuthenticationComponent } from './authentication/authentication.component';
 import { HomeComponent } from './home/home.component';
 import { ComponentsModule } from "./components/components.module";
+import { AccountComponent } from './account/account.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         HomeComponent,
-        AuthenticationComponent
+        AuthenticationComponent,
+        AccountComponent
     ],
     providers: [],
     bootstrap: [AppComponent],
