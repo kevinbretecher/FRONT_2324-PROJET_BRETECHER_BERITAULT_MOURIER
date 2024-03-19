@@ -10,7 +10,7 @@
             <a class="logo-and-button" routerLink="/conversation">Conversation</a>
             <button mat-menu-item class="logo-button-account" [matMenuTriggerFor]="monCompte">Mon compte</button>
             <mat-menu #monCompte="matMenu" class="filesList">
-                <button mat-menu-item (click)='navigateTo("/user-homepage")'>Voir mon profil</button>
+                <button mat-menu-item (click)='navigateTo("/account")'>Voir mon profil</button>
                 <button mat-menu-item (click)='navigateTo("/home")'>Se déconnecter</button>
             </mat-menu>
         </div>
@@ -25,7 +25,7 @@
                 <button mat-menu-item [matMenuTriggerFor]="monCompte">Mon compte</button>
               </mat-menu>
               <mat-menu #monCompte="matMenu" class="filesList">
-                <button mat-menu-item (click)='navigateTo("/user-homepage")'>Voir mon profil</button>
+                <button mat-menu-item (click)='navigateTo("/account")'>Voir mon profil</button>
                 <button mat-menu-item (click)='navigateTo("/home")'>Se déconnecter</button>
               </mat-menu>
             <img class="logo-and-button" (click)='navigateTo("/user-homepage")' [src]="logo.image" [title]="logo.title" [style.width.px]="logo.imageWidth">
