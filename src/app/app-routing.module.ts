@@ -9,6 +9,7 @@ import { ConversationComponent } from './conversation/conversation.component';
 import { ChatComponent } from './chat/chat.component';
 import { AccountComponent } from './account/account.component';
 
+
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'authentication', component: AuthenticationComponent },

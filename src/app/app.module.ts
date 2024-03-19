@@ -24,6 +24,7 @@ import { ChatComponent } from './chat/chat.component';
 import { AccountComponent } from './account/account.component';
 
 
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -35,7 +36,8 @@ import { AccountComponent } from './account/account.component';
         EventListComponent,
         ConversationComponent,
         ChatComponent,
-        AccountComponent
+        AccountComponent,
+        ChatComponent
     ],
     providers: [],
     bootstrap: [AppComponent],
@@ -43,6 +45,13 @@ import { AccountComponent } from './account/account.component';
         BrowserModule,
         ComponentsModule,
         AppRoutingModule,
+        BrowserAnimationsModule,
+        MatIconModule,
+        MatButtonModule,
+        FormsModule,
+        MatInputModule,
+        MatFormFieldModule,
+        MatSelectModule
     ]
 })
 export class AppModule { }
