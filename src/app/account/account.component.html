@@ -5,15 +5,18 @@
             <div class="computer">
                 <div class="card">
                     <div class="card-header">
-                        <h1>Mon compte <img width=80px, height=80px src="../../assets/images/user_kids_avatar_user_profile_icon_149314.svg" alt=""></h1>
+                        <h1> Mon compte </h1>
                     </div>
                     <div class="card-body">
                         <form>
                             <div class="wrap-form-group">
                                 <div class="column-form-group">
-                                    <div class="form-group" id="leftColumn">
-                                        <label for="statut">Statut</label>
-                                        <p>Admin</p>
+                                    <div class="form-group">
+                                        <img id="avatarImage" [src]="img.image" width="80px" height="80px" alt="Avatar">
+                                    </div>
+                                    <div class="form-group">
+                                        <input #fileInput type="file" accept="image/*" (change)="changeImage($event)" style="display: none;">
+                                        <button (click)="openFilePicker()">Changer l'avatar</button>
                                     </div>
                                     <div class="form-group">
                                         <label for="firstname">Prénom</label>
@@ -24,7 +27,11 @@
                                         <p>04/08/1984</p>
                                     </div>
                                 </div>
-                                <div class="column-form-group" id="rightColumn">
+                                <div class="column-form-group">
+                                    <div class="form-group">
+                                        <label for="statut">Statut</label>
+                                        <p>Admin</p>
+                                    </div>
                                     <div class="form-group">
                                         <label for="username">Nom d'utilisateur</label>
                                         <p>Fralito</p>
@@ -40,18 +47,83 @@
                                 </div>
                             </div>
                       </form>
-                      <div class="form-group">
-                        <label for="listEvent">Liste des évènements créés</label>
-                        <div class="card" id="listEventCreated">
-                            <p class="textNoEvent">Aucun évènement créé</p>
+                            <div class="form-group">
+                            <label for="listEvent">Liste des évènements créés</label>
+                            <div class="card" id="listEventCreated">
+                                <p class="textNoEvent">Aucun évènement créé</p>
+                                <!--<div class="wrapper">
+                                    <div class="cardEvent" routerLink="/event-detail">
+                                        <div class="card-imageEvent">
+                                            <img class="logo-and-button" [src]="logo.image" [title]="logo.title" [style.width.px]="logo.imageWidth">
+                                            <p style="color: black;">Football</p>
+                                        </div>
+                                        <div style="margin: auto; display: flex;">
+                                            <p style="color: black;">120€</p>
+                                        </div>
+                                        <div style="margin: auto; display: flex; margin-right: 50px;">
+                                            <p style="color: black;">11/03/2024</p>
+                                        </div>
+                                        <div style="margin: auto; margin-right: 55px;">
+                                            <p style="color: black;">Sport</p>
+                                        </div>
+                                    </div>
+                                </div>-->                                   
+                            </div>
+                        </div>
+                    <div class="wrap-form-group">
+                        <div class="column-form-group">
+                            <div class="form-group">
+                                <label for="nbEventFav">Nombre d'évènements en favoris: </label>
+                                <p>2</p>
+                            </div>
+                        </div>
+                        <div class="column-form-group">
+                            <div class="form-group">
+                                <button (click)="toggleVisibility()" type="button">
+                                    Afficher les évènements
+                                </button>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="nbEventFav">Nombre d'évènements en favoris: </label>
-                        <p>1</p>
-                        <button type="submit">Afficher les évènements</button>
+                        <div class="card" id="listEventFav" *ngIf="isVisible">
+                            <div class="wrapper">
+                                <div class="cardEvent" routerLink="/event-detail">
+                                    <div class="card-imageEvent">
+                                        <img class="logo-and-button" [src]="logo.image" [title]="logo.title" [style.width.px]="logo.imageWidth">
+                                        <p style="color: black;">Football</p>
+                                    </div>
+                                    <div style="margin: auto; display: flex;">
+                                        <p style="color: black;">120€</p>
+                                    </div>
+                                    <div style="margin: auto; display: flex; margin-right: 50px;">
+                                        <p style="color: black;">11/03/2024</p>
+                                    </div>
+                                    <div style="margin: auto; margin-right: 55px;">
+                                        <p style="color: black;">Sport</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="wrapper">
+                                <div class="cardEvent" routerLink="/event-detail">
+                                    <div class="card-imageEvent">
+                                        <img class="logo-and-button" [src]="logo.image" [title]="logo.title" [style.width.px]="logo.imageWidth">
+                                        <p style="color: black;">Football</p>
+                                    </div>
+                                    <div style="margin: auto; display: flex;">
+                                        <p style="color: black;">120€</p>
+                                    </div>
+                                    <div style="margin: auto; display: flex; margin-right: 50px;">
+                                        <p style="color: black;">11/03/2024</p>
+                                    </div>
+                                    <div style="margin: auto; margin-right: 55px;">
+                                        <p style="color: black;">Sport</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    </div>
+                </div>
                 </div>
             </div>
             <div class="smartphone">

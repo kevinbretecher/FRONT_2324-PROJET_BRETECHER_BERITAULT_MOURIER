@@ -41,7 +41,7 @@ import { AccountComponent } from './account/account.component';
     ],
     providers: [],
     bootstrap: [AppComponent],
-    imports: [
+    imports:[
         BrowserModule,
         ComponentsModule,
         AppRoutingModule,
