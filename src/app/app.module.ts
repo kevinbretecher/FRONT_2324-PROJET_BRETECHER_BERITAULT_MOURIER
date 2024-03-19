@@ -21,6 +21,8 @@ import { EventAddComponent } from './event/event-add/event-add.component';
 import { EventListComponent } from './event/event-list/event-list.component';
 import { ConversationComponent } from './conversation/conversation.component';
 import { ChatComponent } from './chat/chat.component';
+import { AccountComponent } from './account/account.component';
+
 
 
 @NgModule({
@@ -33,6 +35,8 @@ import { ChatComponent } from './chat/chat.component';
         EventAddComponent,
         EventListComponent,
         ConversationComponent,
+        ChatComponent,
+        AccountComponent,
         ChatComponent
     ],
     providers: [],

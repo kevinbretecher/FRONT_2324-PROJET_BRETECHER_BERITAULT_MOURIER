@@ -7,6 +7,8 @@ import { EventDetailComponent } from './event/event-detail/event-detail.componen
 import { EventAddComponent } from './event/event-add/event-add.component';
 import { ConversationComponent } from './conversation/conversation.component';
 import { ChatComponent } from './chat/chat.component';
+import { AccountComponent } from './account/account.component';
+
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -16,6 +18,7 @@ const routes: Routes = [
   { path: 'event-add', component: EventAddComponent },
   { path: 'conversation', component: ConversationComponent },
   { path: 'chat', component: ChatComponent },
+  { path: 'account', component: AccountComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];

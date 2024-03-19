@@ -1,0 +1,135 @@
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-width: 300px;
+}
+
+.main-wrapper{
+    margin: auto;
+    height: auto;
+    width: 900px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.wrapper {
+    margin: auto;
+}
+
+.card {
+    background-color: #3A4657;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+
+  .card-header {
+    background-color: #3A4657;
+    color: #fff;
+    text-align: center;
+    padding-top: 20px;
+    font-size: 1.2em;
+    font-family: Arial, sans-serif;
+  }
+
+  .card-body {
+    padding: 20px;
+  }
+
+/*  #leftColumn{
+
+  }*/
+
+  #rightColumn{
+    flex: 1;
+  }
+
+  .form-group {
+    margin: 20px;
+    width: 100%;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    color: #ffffff;
+    font-size: 1em;
+    text-decoration: underline;
+  }
+
+  p {
+    display: block;
+    color: #ffffff;
+    font-size: 1em;
+  }
+
+  input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  button {
+    padding: 10px;
+    background-color: #ffffff;
+    color: #000000;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    display: flex;
+    margin: auto;
+    border: 1px solid #ccc;
+}
+
+  button:hover {
+    background-color: #898c8e;
+  }
+
+  .create-account-button {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    padding: 10px;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 0; 
+  }
+
+  .column-form-group{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+  }
+
+  .wrap-form-group{
+    display: flex;
+  }
+
+  #listEventCreated{
+    background-color: #3F5569;
+    margin-right: 8%;
+  }
+
+  .textNoEvent{
+    text-align: center;
+  }
+
+@media screen and (max-width: 600px) {
+  .computer{
+    display: none;
+  }
+}
+
+@media screen and (min-width: 600px) {
+    .smartphone{
+      display: none;
+    }
+  }
