@@ -6,14 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./user-homepage.component.css']
 })
 export class UserHomepageComponent {
-  eventName = '';
-  max = '';
-  min = '';
 
-  // Caractéristiques du logo
-  logo : any = {
-    imageWidth : 130,
-    imageTitle : "Image",
-    image : "assets/images/logo.svg"
-  };
 }
