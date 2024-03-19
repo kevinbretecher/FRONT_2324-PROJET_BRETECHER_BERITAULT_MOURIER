@@ -4,11 +4,66 @@
     width: auto;
 }
 
+.computer{
+    background-color: #EBE9D6;
+    height: 70px;
+    width: auto;
+    display: flex;
+    padding-inline: 50px;
+}
+
+.smartphone{
+    background-color: #EBE9D6;
+    height: 70px;
+    width: auto;
+    display: flex;
+    padding-inline: 50px;
+}
+
 .header{
     height: 123px;
 }
 
-.logo {
+.logo-and-button {
     margin: auto;
     display: block;
+    text-decoration: none;
+    color: #000;
+}
+
+.logo-button-account {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding: 0px;
+    display: block;
+    text-decoration: none;
+    color: #000;
+}
+
+@media screen and (max-width: 768px) {
+    .computer{
+      display: none;
+    }
+}
+  
+@media screen and (min-width: 769px) {
+    .smartphone{
+    display: none;
+    }
+
+    .mat-mdc-menu-item {
+        width:fit-content;
+    }
+}
+
+.mat-menu-panel {
+    background-color: #EBE9D6 !important;
+    border: none;
+}
+
+::ng-deep .cdk-overlay-pane .filesList{
+    background-color: #EBE9D6;
+    --mat-menu-container-shape: 0px;
 }
