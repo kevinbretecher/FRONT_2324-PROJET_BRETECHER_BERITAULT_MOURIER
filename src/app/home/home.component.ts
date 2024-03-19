@@ -8,4 +8,8 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent {
   constructor(private router: Router) {}
+
+  navigateTo(url: string) {
+    this.router.navigateByUrl(url);
+  }
 }
