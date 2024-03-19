@@ -7,7 +7,6 @@ import { AppComponent } from './app.component';
 import { AuthenticationComponent } from './authentication/authentication.component';
 import { HomeComponent } from './home/home.component';
 import { ComponentsModule } from "./components/components.module";
-import { AccountComponent } from './account/account.component';
 import { UserHomepageComponent } from './user-homepage/user-homepage.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -22,19 +21,21 @@ import { EventAddComponent } from './event/event-add/event-add.component';
 import { EventListComponent } from './event/event-list/event-list.component';
 import { ConversationComponent } from './conversation/conversation.component';
 import { ChatComponent } from './chat/chat.component';
+import { AccountComponent } from './account/account.component';
+
 
 @NgModule({
     declarations: [
         AppComponent,
         HomeComponent,
         AuthenticationComponent,
-        AccountComponent,
         UserHomepageComponent,
         EventDetailComponent,
         EventAddComponent,
         EventListComponent,
         ConversationComponent,
-        ChatComponent
+        ChatComponent,
+        AccountComponent
     ],
     providers: [],
     bootstrap: [AppComponent],
