@@ -16,6 +16,11 @@ import {FormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
+import { EventDetailComponent } from './event/event-detail/event-detail.component';
+import { EventAddComponent } from './event/event-add/event-add.component';
+import { EventListComponent } from './event/event-list/event-list.component';
+import { ConversationComponent } from './conversation/conversation.component';
+import { ChatComponent } from './chat/chat.component';
 
 
 @NgModule({
@@ -23,7 +28,12 @@ import {MatSelectModule} from '@angular/material/select';
         AppComponent,
         HomeComponent,
         AuthenticationComponent,
-        UserHomepageComponent
+        UserHomepageComponent,
+        EventDetailComponent,
+        EventAddComponent,
+        EventListComponent,
+        ConversationComponent,
+        ChatComponent
     ],
     providers: [],
     bootstrap: [AppComponent],
