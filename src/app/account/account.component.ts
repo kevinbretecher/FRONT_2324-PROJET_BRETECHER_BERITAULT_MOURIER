@@ -1,6 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-account',
@@ -13,7 +14,9 @@ export class AccountComponent {
 
   constructor(
     private http: HttpClient, 
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private router: Router, 
+    private route: ActivatedRoute
   ) {}
 
   @ViewChild('fileInput') fileInput!: ElementRef;
@@ -22,8 +25,9 @@ export class AccountComponent {
 
   /*********** Variables ***********/
 
-  userInfo: any = {}; // Pour stocker les informations du profil
+  userInfo: any = {};         // Pour stocker les informations du profil
   img : any = { image : "" }  // Image pour l'avatar
+  username: any;              // Nom d'utilisateur
 
   // Image utilisée dans l'affichage des events
   logo : any = {
@@ -36,9 +40,18 @@ export class AccountComponent {
 
   /*********** Méthodes ***********/
 
+  // Méthode pour passer à une autre URL
+  navigateTo(url: string) {
+    this.router.navigateByUrl(url);
+  }
+
   // Permet de récupérer les informations du profil au chargement du composant
+  // Permet de récupérer le nom d'utilisateur présent dans l'URL
   ngOnInit() {
     this.fetchProfile();
+    this.route.params.subscribe(params => {
+      this.username = params['username'];
+    });
   }
 
   // Méthode pour récupérer les informations du profil depuis le serveur
