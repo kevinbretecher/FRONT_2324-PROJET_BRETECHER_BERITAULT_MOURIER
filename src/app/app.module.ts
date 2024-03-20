@@ -59,7 +59,7 @@ import { AccountComponent } from './account/account.component';
         MatFormFieldModule,
         MatSelectModule,
         MatDatepickerModule,
-        MatNativeDateModule
+        MatNativeDateModule,
         MatSnackBarModule
     ]
 })
