@@ -1,0 +1,176 @@
+<body>
+    <app-header></app-header>
+    <div class="main-wrapper">
+        <div class="wrapper">
+            <div class="computer">
+                <div class="card">
+                    <div class="card-header">
+                        <h1> Mon compte </h1>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="wrap-form-group">
+                                <div class="column-form-group">
+                                    <div class="form-group">
+                                        <img id="avatarImage" [src]="this.img.image" width="80px" height="80px" alt="Avatar">
+                                    </div>
+                                    <div class="form-group">
+                                        <input #fileInput type="file" accept="image/*" (change)="changeImage($event)" style="display: none;">
+                                        <button (click)="openFilePicker()">Changer l'avatar</button>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="firstname">Prénom</label>
+                                        <p>{{ userInfo.firstname }}</p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="birthdate">Date de naissance</label>
+                                        <p>{{ userInfo.birthdate }}</p>
+                                    </div>
+                                </div>
+                                <div class="column-form-group">
+                                    <div class="form-group">
+                                        <label for="statut">Statut</label>
+                                        <p>{{ userInfo.admin }}</p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="username">Nom d'utilisateur</label>
+                                        <p>{{ userInfo.username }}</p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Nom</label>
+                                        <p>{{ userInfo.name }}</p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Adresse mail</label>
+                                        <p>{{ userInfo.email }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                      </form>
+                            <div class="form-group">
+                            <label for="listEvent">Liste des évènements créés</label>
+                            <div class="card" id="listEventCreated">
+                                <p class="textNoEvent">Aucun évènement créé</p>
+                                <!--<div class="wrapper">
+                                    <div class="cardEvent" routerLink="/event-detail">
+                                        <div class="card-imageEvent">
+                                            <img class="logo-and-button" [src]="logo.image" [title]="logo.title" [style.width.px]="logo.imageWidth">
+                                            <p style="color: black;">Football</p>
+                                        </div>
+                                        <div style="margin: auto; display: flex;">
+                                            <p style="color: black;">120€</p>
+                                        </div>
+                                        <div style="margin: auto; display: flex; margin-right: 50px;">
+                                            <p style="color: black;">11/03/2024</p>
+                                        </div>
+                                        <div style="margin: auto; margin-right: 55px;">
+                                            <p style="color: black;">Sport</p>
+                                        </div>
+                                    </div>
+                                </div>-->                                   
+                            </div>
+                        </div>
+                    <div class="wrap-form-group">
+                        <div class="column-form-group">
+                            <div class="form-group">
+                                <label for="nbEventFav">Nombre d'évènements en favoris: </label>
+                                <p>2</p>
+                            </div>
+                        </div>
+                        <div class="column-form-group">
+                            <div class="form-group">
+                                <button (click)="toggleVisibility()" type="button">
+                                    Afficher les évènements
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="card" id="listEventFav" *ngIf="isVisible">
+                            <div class="wrapper">
+                                <div class="cardEvent" routerLink="/event-detail">
+                                    <div class="card-imageEvent">
+                                        <img class="logo-and-button" [src]="logo.image" [title]="logo.title" [style.width.px]="logo.imageWidth">
+                                        <p style="color: black;">Football</p>
+                                    </div>
+                                    <div style="margin: auto; display: flex;">
+                                        <p style="color: black;">120€</p>
+                                    </div>
+                                    <div style="margin: auto; display: flex; margin-right: 50px;">
+                                        <p style="color: black;">11/03/2024</p>
+                                    </div>
+                                    <div style="margin: auto; margin-right: 55px;">
+                                        <p style="color: black;">Sport</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="wrapper">
+                                <div class="cardEvent" routerLink="/event-detail">
+                                    <div class="card-imageEvent">
+                                        <img class="logo-and-button" [src]="logo.image" [title]="logo.title" [style.width.px]="logo.imageWidth">
+                                        <p style="color: black;">Football</p>
+                                    </div>
+                                    <div style="margin: auto; display: flex;">
+                                        <p style="color: black;">120€</p>
+                                    </div>
+                                    <div style="margin: auto; display: flex; margin-right: 50px;">
+                                        <p style="color: black;">11/03/2024</p>
+                                    </div>
+                                    <div style="margin: auto; margin-right: 55px;">
+                                        <p style="color: black;">Sport</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="smartphone">
+                <div class="card">
+                    <div class="card-header">
+                        Mon compte
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="wrap-form-group">
+                                <div class="column-form-group">
+                                    <div class="form-group">
+                                        <label for="statut">Statut</label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="firstname">Prénom</label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Nom</label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Adresse mail</label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="birthdate">Date de naissance</label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="username">Nom d'utilisateur</label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">Mot de passe</label>
+                                        <input type="password" id="password" name="password" required placeholder="Entrez votre mot de passe">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="listEvent">Liste des évènements créés</label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="nbEventFav">Nombre d'évènements en favoris : </label>
+                                        <button type="submit">Afficher les évènements</button>
+                                    </div>
+                                </div>
+                            </div>
+                      </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <app-footer></app-footer>
+</body>
