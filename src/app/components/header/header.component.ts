@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -10,9 +10,10 @@ export class HeaderComponent {
 
   // Variables
   currentUrl: string;
+  username: any;
 
   // Constructeur
-  constructor(private router: Router) {
+  constructor(private router: Router, private route: ActivatedRoute) {
     this.currentUrl = this.router.url;
   }
 
@@ -31,12 +32,13 @@ export class HeaderComponent {
     image : "assets/images/logo.svg"
   };
 
-  onMenuItemClick(option: string) {
-    console.log('Option sélectionnée :', option);
-    // Ajoutez ici la logique pour gérer le clic sur une option de menu
-  }
-
   navigateTo(url: string) {
     this.router.navigateByUrl(url);
+  }
+
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.username = params['username'];
+    });
   }
 }

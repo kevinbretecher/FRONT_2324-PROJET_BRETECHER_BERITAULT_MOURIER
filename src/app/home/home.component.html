@@ -10,13 +10,13 @@
                   <form>
                     <div class="form-group">
                       <label for="username">Adresse mail</label>
-                      <input type="text" id="username" name="username" required placeholder="Entrez votre e-mail">
+                      <input type="text" id="username" name="username" required placeholder="Entrez votre e-mail" [(ngModel)]="formToConnect.email">
                     </div>
                     <div class="form-group">
                       <label for="password">Mot de passe</label>
-                      <input type="password" id="password" name="password" required placeholder="Entrez votre mot de passe">
+                      <input type="password" id="password" name="password" required placeholder="Entrez votre mot de passe" [(ngModel)]="formToConnect.password">
                     </div>
-                    <button type="submit" (click)='navigateTo("/user-homepage")'>Se connecter</button>
+                    <button type="button" (click)="onSubmit()">Se connecter</button>
                   </form>
                 </div>
             </div>

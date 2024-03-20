@@ -4,13 +4,13 @@
     </div>
     <div *ngIf="AuthentOrConnectionPage(currentUrl) === false">
         <div class="computer">
-            <img class="logo-and-button" (click)='navigateTo("/user-homepage")' [src]="logo.image" [title]="logo.title" [style.width.px]="logo.imageWidth">
-            <a class="logo-and-button" routerLink="/user-homepage">Accueil</a>
-            <a class="logo-and-button" routerLink="/event-add">Ajouter un événement</a>
-            <a class="logo-and-button" routerLink="/conversation">Conversation</a>
+            <img class="logo-and-button" (click)='navigateTo("/user-homepage/"+username)' [src]="logo.image" [title]="logo.title" [style.width.px]="logo.imageWidth">
+            <a class="logo-and-button" (click)='navigateTo("/user-homepage/"+username)'>Accueil</a>
+            <a class="logo-and-button" (click)="navigateTo('/user-homepage/' + username + '/event-add')">Ajouter un événement</a>
+            <a class="logo-and-button" (click)="navigateTo('/user-homepage/' + username + '/conversation')">Conversation</a>
             <button mat-menu-item class="logo-button-account" [matMenuTriggerFor]="monCompte">Mon compte</button>
             <mat-menu #monCompte="matMenu" class="filesList">
-                <button mat-menu-item (click)='navigateTo("/account")'>Voir mon profil</button>
+                <button mat-menu-item (click)="navigateTo('/user-homepage/' + username + '/account')">Voir mon profil</button>
                 <button mat-menu-item (click)='navigateTo("/home")'>Se déconnecter</button>
             </mat-menu>
         </div>
@@ -19,16 +19,16 @@
                 <mat-icon>menu</mat-icon>
               </button>
               <mat-menu #menu="matMenu" class="filesList">
-                <button mat-menu-item (click)='navigateTo("/user-homepage")'>Accueil</button>
-                <button mat-menu-item (click)='navigateTo("/event-add")'>Ajouter un événement</button>
-                <button mat-menu-item (click)='navigateTo("/conversation")'>Conversation</button>
+                <button mat-menu-item (click)='navigateTo("/user-homepage/"+username)'>Accueil</button>
+                <button mat-menu-item (click)="navigateTo('/user-homepage/' + username + '/event-add')">Ajouter un événement</button>
+                <button mat-menu-item (click)="navigateTo('/user-homepage/' + username + '/conversation')">Conversation</button>
                 <button mat-menu-item [matMenuTriggerFor]="monCompte">Mon compte</button>
               </mat-menu>
               <mat-menu #monCompte="matMenu" class="filesList">
-                <button mat-menu-item (click)='navigateTo("/account")'>Voir mon profil</button>
+                <button mat-menu-item (click)="navigateTo('/user-homepage/' + username + '/account')">Voir mon profil</button>
                 <button mat-menu-item (click)='navigateTo("/home")'>Se déconnecter</button>
               </mat-menu>
-            <img class="logo-and-button" (click)='navigateTo("/user-homepage")' [src]="logo.image" [title]="logo.title" [style.width.px]="logo.imageWidth">
+            <img class="logo-and-button" (click)='navigateTo("/user-homepage/"+username)' [src]="logo.image" [title]="logo.title" [style.width.px]="logo.imageWidth">
             <button mat-icon-button class="mat-menu-panel" [matMenuTriggerFor]="monCompte">
                 <mat-icon>account_circle</mat-icon>
             </button>

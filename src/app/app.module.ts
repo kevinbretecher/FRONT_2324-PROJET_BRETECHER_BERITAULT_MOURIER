@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +19,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 import { EventDetailComponent } from './event/event-detail/event-detail.component';
 import { EventAddComponent } from './event/event-add/event-add.component';
 import { EventListComponent } from './event/event-list/event-list.component';
@@ -45,6 +48,7 @@ import { AccountComponent } from './account/account.component';
     bootstrap: [AppComponent],
     imports:[
         BrowserModule,
+        HttpClientModule,
         ComponentsModule,
         AppRoutingModule,
         BrowserAnimationsModule,
@@ -56,6 +60,7 @@ import { AccountComponent } from './account/account.component';
         MatSelectModule,
         MatDatepickerModule,
         MatNativeDateModule
+        MatSnackBarModule
     ]
 })
 export class AppModule { }
