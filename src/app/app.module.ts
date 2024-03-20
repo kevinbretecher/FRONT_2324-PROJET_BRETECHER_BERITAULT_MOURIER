@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,6 +17,8 @@ import {FormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 import { EventDetailComponent } from './event/event-detail/event-detail.component';
 import { EventAddComponent } from './event/event-add/event-add.component';
 import { EventListComponent } from './event/event-list/event-list.component';
@@ -43,6 +46,7 @@ import { AccountComponent } from './account/account.component';
     bootstrap: [AppComponent],
     imports: [
         BrowserModule,
+        HttpClientModule,
         ComponentsModule,
         AppRoutingModule,
         BrowserAnimationsModule,
@@ -51,7 +55,8 @@ import { AccountComponent } from './account/account.component';
         FormsModule,
         MatInputModule,
         MatFormFieldModule,
-        MatSelectModule
+        MatSelectModule,
+        MatSnackBarModule
     ]
 })
 export class AppModule { }
