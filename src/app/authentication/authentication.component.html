@@ -8,38 +8,38 @@
                       Inscription
                     </div>
                     <div class="card-body">
-                        <form>
+                        <form #form="ngForm" (ngSubmit)="onSubmit(form)">
                             <div class="wrap-form-group">
                                 <div class="column-form-group">
                                     <div class="form-group">
                                         <label for="firstname">Prénom</label>
-                                        <input type="text" id="firstname" name="firstname" required placeholder="Entrez votre prénom">
+                                        <input type="text" id="firstname" name="firstname" required placeholder="Entrez votre prénom" [(ngModel)]="formData.firstname">
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Adresse mail</label>
-                                        <input type="email" id="email" name="email" required placeholder="Entrez votre mail">
+                                        <input type="email" id="email" name="email" required placeholder="Entrez votre mail" [(ngModel)]="formData.email">
                                     </div>
                                     <div class="form-group">
                                         <label for="username">Nom d'utilisateur</label>
-                                        <input type="text" id="username" name="username" required placeholder="Entrez votre nom d'utilisateur">
+                                        <input type="text" id="username" name="username" required placeholder="Entrez votre nom d'utilisateur" [(ngModel)]="formData.username">
                                     </div>
                                     <div class="form-group">
                                         <label for="password">Mot de passe</label>
-                                        <input type="password" id="password" name="password" required placeholder="Entrez votre mot de passe">
+                                        <input type="password" id="password" name="password" required placeholder="Entrez votre mot de passe" [(ngModel)]="formData.password">
                                     </div>
                                 </div>
                                 <div class="column-form-group">
                                     <div class="form-group">
                                         <label for="name">Nom</label>
-                                        <input type="text" id="name" name="name" required placeholder="Entrez votre nom">
+                                        <input type="text" id="name" name="name" required placeholder="Entrez votre nom" [(ngModel)]="formData.name">
                                     </div>
                                     <div class="form-group">
                                         <label for="birthdate">Date de naissance</label>
-                                        <input type="date" id="birthdate" name="birthdate" required placeholder="Entrez votre date de naissance">
+                                        <input type="date" id="birthdate" name="birthdate" required placeholder="Entrez votre date de naissance" [(ngModel)]="formData.birthdate">
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" (click)='navigateTo("/user-homepage")'>S'inscrire</button>
+                            <button type="button" (click)="onSubmit(form)">S'inscrire</button>
                       </form>
                     </div>
                 </div>
@@ -50,36 +50,36 @@
                       Inscription
                     </div>
                     <div class="card-body">
-                        <form>
+                        <form #form="ngForm" (ngSubmit)="onSubmit(form)">
                             <div class="wrap-form-group">
                                 <div class="column-form-group">
                                     <div class="form-group">
                                         <label for="firstname">Prénom</label>
-                                        <input type="text" id="firstname" name="firstname" required placeholder="Entrez votre prénom">
+                                        <input type="text" id="firstname-format-smartphone" name="firstname" required placeholder="Entrez votre prénom" [(ngModel)]="formData.firstname">
                                     </div>
                                     <div class="form-group">
                                         <label for="name">Nom</label>
-                                        <input type="text" id="name" name="name" required placeholder="Entrez votre nom">
+                                        <input type="text" id="name-format-smartphone" name="name" required placeholder="Entrez votre nom" [(ngModel)]="formData.name">
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Adresse mail</label>
-                                        <input type="email" id="email" name="email" required placeholder="Entrez votre mail">
+                                        <input type="email" id="email-format-smartphone" name="email" required placeholder="Entrez votre mail" [(ngModel)]="formData.email">
                                     </div>
                                     <div class="form-group">
                                         <label for="birthdate">Date de naissance</label>
-                                        <input type="date" id="birthdate" name="birthdate" required placeholder="Entrez votre date de naissance">
+                                        <input type="date" id="birthdate-format-smartphone" name="birthdate" required placeholder="Entrez votre date de naissance" [(ngModel)]="formData.birthdate">
                                     </div>
                                     <div class="form-group">
                                         <label for="username">Nom d'utilisateur</label>
-                                        <input type="text" id="username" name="username" required placeholder="Entrez votre nom d'utilisateur">
+                                        <input type="text" id="username-format-smartphone" name="username" required placeholder="Entrez votre nom d'utilisateur" [(ngModel)]="formData.username">
                                     </div>
                                     <div class="form-group">
                                         <label for="password">Mot de passe</label>
-                                        <input type="password" id="password" name="password" required placeholder="Entrez votre mot de passe">
+                                        <input type="password" id="password-format-smartphone" name="password" required placeholder="Entrez votre mot de passe" [(ngModel)]="formData.password">
                                     </div>
                                 </div>
                             </div>
-                            <button type="submit" (click)='navigateTo("/user-homepage")'>S'inscrire</button>
+                            <button type="button" (click)="onSubmit(form)">S'inscrire</button>
                       </form>
                     </div>
                 </div>
