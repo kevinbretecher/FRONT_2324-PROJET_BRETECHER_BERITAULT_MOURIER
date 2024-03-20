@@ -18,6 +18,7 @@ const routes: Routes = [
   { path: 'event-detail', component: EventDetailComponent },
   { path: 'user-homepage/:username/event-detail', component: EventDetailComponent },
   { path: 'event-add', component: EventAddComponent },
+  { path: 'event-edit', component: EventAddComponent },
   { path: 'user-homepage/:username/event-add', component: EventAddComponent },
   { path: 'conversation', component: ConversationComponent },
   { path: 'user-homepage/:username/conversation', component: ConversationComponent },
