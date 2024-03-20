@@ -16,6 +16,7 @@ const routes: Routes = [
   { path: 'user-homepage', component: UserHomepageComponent },
   { path: 'event-detail', component: EventDetailComponent },
   { path: 'event-add', component: EventAddComponent },
+  { path: 'event-edit', component: EventAddComponent },
   { path: 'conversation', component: ConversationComponent },
   { path: 'chat', component: ChatComponent },
   { path: 'account', component: AccountComponent },

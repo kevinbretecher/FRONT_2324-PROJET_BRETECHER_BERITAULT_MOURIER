@@ -16,6 +16,8 @@ import {FormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import { EventDetailComponent } from './event/event-detail/event-detail.component';
 import { EventAddComponent } from './event/event-add/event-add.component';
 import { EventListComponent } from './event/event-list/event-list.component';
@@ -51,7 +53,9 @@ import { AccountComponent } from './account/account.component';
         FormsModule,
         MatInputModule,
         MatFormFieldModule,
-        MatSelectModule
+        MatSelectModule,
+        MatDatepickerModule,
+        MatNativeDateModule
     ]
 })
 export class AppModule { }

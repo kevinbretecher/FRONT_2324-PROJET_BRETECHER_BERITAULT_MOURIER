@@ -1,7 +1,136 @@
 <body>
     <app-header></app-header>
     <div class="main-wrapper">
-        <p style="color: white;">AJOUTER UN EVENEMENT</p>
+        <div class="wrapper">
+            <div *ngIf="showAddView" class="add">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 style="text-align: center; color: white;">Page d'ajout d'évènement</h1>
+                        <div class="wrap-form-group">
+                            <div class="column-form-group">
+                                <div class="form-group">
+                                    <p>Nom de l'évènement :</p>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label class="placeholder">Nom de l'événement</mat-label>
+                                        <input matInput type="text" [(ngModel)]="eventName">
+                                          <button matSuffix mat-icon-button *ngIf="eventName" aria-label="Clear" (click)="eventName=''">
+                                            <mat-icon>close</mat-icon>
+                                          </button>
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group">
+                                    <p>Date :</p>
+                                    <mat-form-field appearance="outline" class="example-margin example-width">
+                                        <mat-label>Date</mat-label>
+                                        <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate" (click)="picker.open()">
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group">
+                                    <p>Choix image :</p>
+                                    <input #fileInput type="file" (change)="changeImage($event)" style="display: none;">
+                                    <button (click)="openFilePicker()">Choisir une image</button>
+                                </div>
+                            </div>
+                            <div class="column-form-group">
+                                <div class="form-group">
+                                    <p>Prix :</p>
+                                    <mat-form-field appearance="outline" class="example-margin example-width">
+                                        <mat-label>Prix</mat-label>
+                                        <input matInput type="number" [(ngModel)]="min">
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group">
+                                    <p>Thème :</p>
+                                    <mat-form-field appearance="outline" class="example-width">
+                                        <mat-label>Thème</mat-label>
+                                        <mat-select>
+                                          <mat-option value="one">Sport</mat-option>
+                                          <mat-option value="two">Culture</mat-option>
+                                          <mat-option value="three">Festif</mat-option>
+                                          <mat-option value="four">Pro</mat-option>
+                                          <mat-option value="five">Autres</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group">
+                                    <img id="avatarImage" [src]="img.image" width="300px" height="200px" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="button-container">
+                            <button type="submit">Ajouter</button>
+                            <button type="submit">Annuler</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="showEditView" class="edit">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 style="text-align: center; color: white;">Page de modification d'évènement</h1>
+                        <div class="wrap-form-group">
+                            <div class="column-form-group">
+                                <div class="form-group">
+                                    <p>Nom de l'évènement :</p>
+                                    <mat-form-field appearance="outline">
+                                        <mat-label class="placeholder">Nom de l'événement</mat-label>
+                                        <input matInput type="text" [(ngModel)]="eventName2">
+                                          <button matSuffix mat-icon-button *ngIf="eventName2" aria-label="Clear" (click)="eventName=''">
+                                            <mat-icon>close</mat-icon>
+                                          </button>
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group">
+                                    <p>Date :</p>
+                                    <mat-form-field appearance="outline" class="example-margin example-width">
+                                        <mat-label>Date</mat-label>
+                                        <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate2" (click)="picker.open()">
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group">
+                                    <p>Choix image :</p>
+                                    <input #fileInput type="file" (change)="changeImage($event)" style="display: none;">
+                                    <button (click)="openFilePicker()">Choisir une image</button>
+                                </div>
+                            </div>
+                            <div class="column-form-group">
+                                <div class="form-group">
+                                    <p>Prix :</p>
+                                    <mat-form-field appearance="outline" class="example-margin example-width">
+                                        <mat-label>Prix</mat-label>
+                                        <input matInput type="number" [(ngModel)]="prix">
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group">
+                                    <p>Thème :</p>
+                                    <mat-form-field appearance="outline" class="example-width">
+                                        <mat-label>Thème</mat-label>
+                                        <mat-select [(ngModel)]="theme">
+                                            <mat-option value="Sport">Sport</mat-option>
+                                            <mat-option value="Culture">Culture</mat-option>
+                                            <mat-option value="Festif">Festif</mat-option>
+                                            <mat-option value="Pro">Pro</mat-option>
+                                            <mat-option value="Autres">Autres</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="form-group">
+                                    <img id="avatarImage" [src]="img.image2" width="300px" height="200px" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="button-container">
+                            <button type="submit">Modifier</button>
+                            <button type="submit">Annuler</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <app-footer></app-footer>
 </body>
