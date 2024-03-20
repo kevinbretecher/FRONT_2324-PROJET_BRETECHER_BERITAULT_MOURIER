@@ -1,14 +1,16 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserService } from '../services/user/user.service'; 
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.css']
 })
-export class AccountComponent {
+export class AccountComponent implements OnInit {
 
   /*********** Constructeur ***********/
 
@@ -16,7 +18,9 @@ export class AccountComponent {
     private http: HttpClient, 
     private cookieService: CookieService,
     private router: Router, 
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private userService: UserService,
+    private snackBar: MatSnackBar
   ) {}
 
   @ViewChild('fileInput') fileInput!: ElementRef;
@@ -56,24 +60,18 @@ export class AccountComponent {
 
   // Méthode pour récupérer les informations du profil depuis le serveur
   fetchProfile(): void {
-    const token = this.cookieService.get('authenticationToken');
-
-    if (token) {
-      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-      
-      this.http.get<any>('http://localhost:3000/profile', { headers: headers })
-        .subscribe(
-          response => {
-            this.userInfo = response;
-            this.img.image = 'http://localhost:3000'+this.userInfo.avatar;
-          },
-          error => {
-            console.error('Erreur lors de la récupération du profil :', error);
-          }
-        );
-        } else{
-          console.error('Token non trouvé dans le cookie.');
-        }
+    this.userService.getProfile().subscribe({
+      next: (response) => {
+        this.userInfo = response;
+        this.img.image = 'http://localhost:3000' + this.userInfo.avatar;
+      },
+      error: () => {
+        this.snackBar.open('Un problème est survenu lors du chargement de votre profil', 'Fermer', {
+          duration: 5000,
+          verticalPosition: 'top'
+        });
+      }
+    });
   }
 
   // Méthode pour afficher / cacher events
@@ -102,20 +100,16 @@ export class AccountComponent {
 
   // Méthode pour mettre à jour l'avatar en base
   uploadAvatar(base64Image: string): void {
-    const token = this.cookieService.get('authenticationToken');
-    if (token) {
-      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-      this.http.post<any>('http://localhost:3000/profile', { avatar: base64Image }, { headers: headers })
-        .subscribe(
-          response => {
-            this.userInfo.avatar = response.newAvatarUrl;
-          },
-          error => {
-            console.error('Erreur lors de l\'envoi de l\'avatar :', error);
-          }
-        );
-    } else {
-      console.error('Token non trouvé dans le cookie.');
-    }
+    this.userService.postProfile(base64Image).subscribe({
+      next: (response) => {
+        this.userInfo.avatar = response.newAvatarUrl;
+      },
+      error: () => {
+        this.snackBar.open('Un problème est survenu lors de la modification de votre avatar', 'Fermer', {
+          duration: 5000,
+          verticalPosition: 'top'
+        });
+      }
+    });
   }
 }

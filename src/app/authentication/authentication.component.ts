@@ -4,6 +4,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CookieService } from 'ngx-cookie-service';
+import { UserService } from '../services/user/user.service';
 
 @Component({
   selector: 'app-authentication',
@@ -18,7 +19,8 @@ export class AuthenticationComponent {
     private router: Router, 
     private http: HttpClient, 
     private snackBar: MatSnackBar, 
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private userService: UserService
   ) {}
 
 
@@ -49,23 +51,23 @@ export class AuthenticationComponent {
     };
  
     if (form.valid) {
-      this.http.post<any>('http://localhost:3000/signup', userData)
-      .subscribe((response: HttpResponse<any>) => {
-        const token = response.body.token;
-
-        this.cookieService.set('authenticationToken', token, undefined, '/', undefined, true, 'Strict');
-        this.navigateTo(`/user-homepage/${this.formData.username}`);
-      }, (error: HttpResponse<any>) => {
-        if (error.status === 400) {
-          this.snackBar.open('Le nom d\'utilisateur ou l\'e-mail que vous avez renseigné est déjà utilisé.', 'Fermer', {
-            duration: 5000,
-            verticalPosition: 'top'
-          });
-        } else {
-          this.snackBar.open('500 Internal Server Error', 'Fermer', {
-            duration: 5000,
-            verticalPosition: 'top'
-          });
+      this.userService.postSignUp(userData).subscribe({
+        next: (response) => {
+          this.cookieService.set('authenticationToken', response.token, undefined, '/', undefined, true, 'Strict');
+          this.navigateTo(`/user-homepage/${response.username}`);
+        },
+        error: (error) => {
+          if (error.status === 400) {
+            this.snackBar.open('Le nom d\'utilisateur ou l\'e-mail que vous avez renseigné est déjà utilisé.', 'Fermer', {
+              duration: 5000,
+              verticalPosition: 'top'
+            });
+          } else {
+            this.snackBar.open('500 Internal Server Error', 'Fermer', {
+              duration: 5000,
+              verticalPosition: 'top'
+            });
+          }
         }
       });
     }
