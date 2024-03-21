@@ -57,7 +57,7 @@
     </div>
 </div>
 <div class="wrapper" *ngFor="let event of events">
-    <div class="card" (click)="navigateTo('/user-homepage/' + username + '/event-detail')">
+    <div class="card" (click)="navigateTo('/user-homepage/' + username + '/event-detail/' + event._id)">
         <div class="card-image">
             <img class="logo-and-button" [src]="logo.image" [title]="logo.title" [style.width.px]="logo.imageWidth">
             <p>{{ event.name }}</p>

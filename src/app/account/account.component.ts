@@ -1,6 +1,4 @@
 import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { CookieService } from 'ngx-cookie-service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../services/user/user.service'; 
 import { MatSnackBar } from '@angular/material/snack-bar';

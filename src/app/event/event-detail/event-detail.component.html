@@ -13,24 +13,24 @@
                             </div>
                             <div class="column-form-group">
                                 <div class="form-group">
-                                    <h1 style="color: white;"><u>Football</u></h1>
+                                    <h1 style="color: white;"><u>{{ eventInfo.name }}</u></h1>
                                 </div>
                             </div>
                         </div>
                         <div class="wrap-form-group">
                             <div class="column-form-group">
                                 <div class="form-group">
-                                    <p>Prix: 5€</p>
+                                    <p>Prix: {{ eventInfo.price }}€</p>
                                 </div>
                             </div>
                             <div class="column-form-group">
                                 <div class="form-group">
-                                    <p>Date : 18/03/2024</p>
+                                    <p>Date : {{ eventInfo.date }}</p>
                                 </div>
                             </div>
                             <div class="column-form-group">
                                 <div class="form-group">
-                                    <p>Thème : Sport</p>
+                                    <p>Thème : {{ eventInfo.theme }}</p>
                                 </div>
                             </div>
                         </div>
@@ -47,7 +47,7 @@
                             </ul>
                         </div>
                         <div class="button-container">
-                            <button type="submit">Editer</button>
+                            <button (click)="navigateTo('/user-homepage/' + username + '/event-edit/' + eventId)">Editer</button>
                             <button type="submit">Ajouter aux favoris</button>
                         </div>
                     </div>

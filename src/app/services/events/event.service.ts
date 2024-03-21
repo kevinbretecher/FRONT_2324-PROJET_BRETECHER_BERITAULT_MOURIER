@@ -30,15 +30,31 @@ export class EventService {
   }
 
   // Créer un nouvel event
-  postEvent(event: IEvent): Observable<IEvent[]> {
+  postNewEvent(event: IEvent): Observable<IEvent[]> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.getTokenFromCookie()}`);
     return this.http.post<IEvent[]>('http://localhost:3000/events/new', event, { headers: headers }).pipe(
       catchError(this.handleError)
     );
   }
 
+  // Modifier un event
+  postModifyEvent(event: IEvent): Observable<IEvent[]> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.getTokenFromCookie()}`);
+    return this.http.post<IEvent[]>(`http://localhost:3000/events/${event._id}/edit`, event, { headers: headers }).pipe(
+      catchError(this.handleError)
+    );
+  }
+  
+  // Récupérer event avec son id
+  getEventById(eventId: string): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.getTokenFromCookie()}`);
+    return this.http.get<any>(`http://localhost:3000/events/${eventId}`, { headers }).pipe(
+      catchError(this.handleError)
+    );
+  }
 
 
+  
   /*********** Méthodes ***********/
 
   // Récupérer le token

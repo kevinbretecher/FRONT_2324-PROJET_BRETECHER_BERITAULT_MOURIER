@@ -1,4 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IEvent } from 'src/app/services/events/event.interface';
 import { EventService } from 'src/app/services/events/event.service';
@@ -16,7 +17,8 @@ export class EventAddComponent {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private eventService: EventService
+    private eventService: EventService,
+    private snackBar: MatSnackBar
   ) {}
   
   @ViewChild('fileInput') fileInput!: ElementRef;
@@ -29,17 +31,13 @@ export class EventAddComponent {
   showEditView: boolean = false;      // Vue édition event
   
   eventName = '';                     // Nom de l'event
-  eventName2 = 'Football';
-  min = '';                           // Prix minimum
   selectedDate = '';                  // Date sélectionnée
-  selectedDate2 : Date = new Date();
-  theme = 'Sport';                    // Thème
+  theme = '';                         // Thème
   prix = '';                          // Prix
 
   username: any;                      // Nom d'utilisateur
-
-  events: IEvent[] = [];              // Liste d'event
-  eventCreated!: IEvent;
+  eventId!: string;                   // Id de l'event
+  eventInfo: any = {};                // Pour stocker les informations de l'event
 
   // Image pour l'event
   img : any = {
@@ -74,6 +72,7 @@ export class EventAddComponent {
   }
 
   // Permet d'afficher la page d'ajout ou d'édition d'event en fonction de l'URL
+  // Permet de récupérer le username et l'id de l'event situés dans l'URL
   ngOnInit(): void {
     this.route.url.subscribe(url => {
       if (url[2].path === 'event-add') {
@@ -85,23 +84,61 @@ export class EventAddComponent {
 
     this.route.params.subscribe(params => {
       this.username = params['username'];
+      this.eventId = params['eventId'];
+      this.getEventDetails(this.eventId);
     });
   }
 
-  submitForm(): void {
+  // Méthode pour récupérer les informations du profil depuis le serveur
+  getEventDetails(eventId: string): void {
+    this.eventService.getEventById(eventId).subscribe({
+      next: (response) => {
+        this.eventInfo = response;
+      },
+      error: () => {
+        this.snackBar.open('Un problème est survenu lors de la récupération des informations de \'event', 'Fermer', {
+          duration: 5000,
+          verticalPosition: 'top'
+        });
+      }
+    });
+  }
+
+  // Permet d'enregistrer un nouvel event en base
+  submitFormAdd(): void {
     const event = {
       name: this.eventName,
       date: new Date(this.selectedDate).toISOString().split('T')[0],
       theme: this.theme,
       price: parseFloat(this.prix),
-      id: 0,
+      _id: 0,
       location: '',
       owner: '',
       image: ''
     };
-      console.log(this.selectedDate);
-     console.log(event.date);
-    this.eventService.postEvent(event).subscribe(
+    this.eventService.postNewEvent(event).subscribe(
+      () => {
+        this.navigateTo(`/user-homepage/${this.username}`);
+      },
+      (error) => {
+        console.error('Erreur lors de l\'envoi des données:', error);
+      }
+    );
+  }
+
+  // Permet de modifier un event déjà existant
+  submitFormEdit(): void {
+    const event = {
+      name: this.eventInfo.name,
+      date: new Date(this.eventInfo.date).toISOString().split('T')[0],
+      theme: this.eventInfo.theme,
+      price: parseFloat(this.eventInfo.price),
+      _id: this.eventInfo._id,
+      location: '',
+      owner: '',
+      image: ''
+    };
+    this.eventService.postModifyEvent(event).subscribe(
       () => {
         this.navigateTo(`/user-homepage/${this.username}`);
       },
