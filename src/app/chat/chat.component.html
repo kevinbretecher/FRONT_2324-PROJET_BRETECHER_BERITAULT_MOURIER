@@ -1,7 +1,29 @@
 <body>
     <app-header></app-header>
     <div class="main-wrapper">
-        <p style="color: white;">CHAT</p>
+        <div class="wrapper">
+            <div class="card">
+                <div class="card-body">
+                    <h1 style="text-align: center; color: white;">Chat avec Meazow</h1>
+                    <div class="card" style="background-color: #3F5569;">
+                        <!-- Zone pour afficher les messages -->
+                        <div class="message-area">
+                            <div class="zoneMessage" *ngFor="let message of messages">
+                                <p>{{ message.sender }} - {{ message.timestamp | date: 'HH:mm:ss dd/MM/yyyy' }}</p>
+                                <p id="messageEnvoye">{{ message.content }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <!-- Zone pour saisir un nouveau message -->
+                    <div class="message-input">
+                        <input [(ngModel)]="newMessage" placeholder="Saisissez votre message ici" (keydown.enter)="sendMessage()">
+                        <button (click)="sendMessage()">Envoyer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+    
     <app-footer></app-footer>
 </body>
