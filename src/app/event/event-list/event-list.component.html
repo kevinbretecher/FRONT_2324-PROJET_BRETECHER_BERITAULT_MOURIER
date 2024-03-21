@@ -56,71 +56,20 @@
         <div style="margin: auto;"><p>Thème</p></div>
     </div>
 </div>
-<div class="wrapper">
+<div class="wrapper" *ngFor="let event of events">
     <div class="card" (click)="navigateTo('/user-homepage/' + username + '/event-detail')">
         <div class="card-image">
             <img class="logo-and-button" [src]="logo.image" [title]="logo.title" [style.width.px]="logo.imageWidth">
-            <p>Football</p>
+            <p>{{ event.name }}</p>
         </div>
         <div style="margin: auto; display: flex;">
-            <p>120€</p>
+            <p>{{ event.price }}€</p>
         </div>
         <div style="margin: auto; display: flex; margin-right: 50px;">
-            <p>11/03/2024</p>
+            <p>{{ event.date }}</p>
         </div>
         <div style="margin: auto; margin-right: 55px;">
-            <p>Sport</p>
-        </div>
-    </div>
-</div>
-<div class="wrapper">
-    <div class="card" (click)="navigateTo('/user-homepage/' + username + '/event-detail')">
-        <div class="card-image">
-            <img class="logo-and-button" [src]="logo.image" [title]="logo.title" [style.width.px]="logo.imageWidth">
-            <p>Football</p>
-        </div>
-        <div style="margin: auto; display: flex;">
-            <p>5€</p>
-        </div>
-        <div style="margin: auto; display: flex; margin-right: 50px;">
-            <p>11/03/2024</p>
-        </div>
-        <div style="margin: auto; margin-right: 55px;">
-            <p>Sport</p>
-        </div>
-    </div>
-</div>
-<div class="wrapper">
-    <div class="card" (click)="navigateTo('/user-homepage/' + username + '/event-detail')">
-        <div class="card-image">
-            <img class="logo-and-button" [src]="logo.image" [title]="logo.title" [style.width.px]="logo.imageWidth">
-            <p>Football</p>
-        </div>
-        <div style="margin: auto; display: flex;">
-            <p>5€</p>
-        </div>
-        <div style="margin: auto; display: flex; margin-right: 50px;">
-            <p>11/03/2024</p>
-        </div>
-        <div style="margin: auto; margin-right: 55px;">
-            <p>Sport</p>
-        </div>
-    </div>
-</div>
-<div class="wrapper">
-    <div class="card" (click)="navigateTo('/user-homepage/' + username + '/event-detail')">
-        <div class="card-image">
-            <img class="logo-and-button" [src]="logo.image" [title]="logo.title" [style.width.px]="logo.imageWidth">
-            <p>Football</p>
-        </div>
-        <div style="margin: auto; display: flex;">
-            <p>5€</p>
-        </div>
-        <div style="margin: auto; display: flex; margin-right: 50px;">
-            <p>11/03/2024</p>
-        </div>
-        <div style="margin: auto; margin-right: 55px;">
-            <p>Sport</p>
+            <p>{{ event.theme }}</p>
         </div>
     </div>
 </div>

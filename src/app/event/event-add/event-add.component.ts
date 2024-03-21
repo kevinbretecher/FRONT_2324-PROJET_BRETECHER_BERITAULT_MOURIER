@@ -1,5 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { IEvent } from 'src/app/services/events/event.interface';
+import { EventService } from 'src/app/services/events/event.service';
 
 
 @Component({
@@ -11,7 +13,11 @@ export class EventAddComponent {
 
   /*********** Constructeur ***********/
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private eventService: EventService
+  ) {}
   
   @ViewChild('fileInput') fileInput!: ElementRef;
 
@@ -28,7 +34,12 @@ export class EventAddComponent {
   selectedDate = '';                  // Date sélectionnée
   selectedDate2 : Date = new Date();
   theme = 'Sport';                    // Thème
-  prix = '2';                         // Prix
+  prix = '';                          // Prix
+
+  username: any;                      // Nom d'utilisateur
+
+  events: IEvent[] = [];              // Liste d'event
+  eventCreated!: IEvent;
 
   // Image pour l'event
   img : any = {
@@ -40,6 +51,11 @@ export class EventAddComponent {
 
   /*********** Méthodes ***********/
   
+  // Méthode pour passer à une autre URL
+  navigateTo(url: string) {
+    this.router.navigateByUrl(url);
+  }
+
   // Méthode pour accéder à l'explorateur de fichier et sélectionner un nouvel avatar
   openFilePicker(): void {
     this.fileInput.nativeElement.click();
@@ -66,5 +82,32 @@ export class EventAddComponent {
         this.showEditView = true;
       }
     });
+
+    this.route.params.subscribe(params => {
+      this.username = params['username'];
+    });
+  }
+
+  submitForm(): void {
+    const event = {
+      name: this.eventName,
+      date: new Date(this.selectedDate).toISOString().split('T')[0],
+      theme: this.theme,
+      price: parseFloat(this.prix),
+      id: 0,
+      location: '',
+      owner: '',
+      image: ''
+    };
+      console.log(this.selectedDate);
+     console.log(event.date);
+    this.eventService.postEvent(event).subscribe(
+      () => {
+        this.navigateTo(`/user-homepage/${this.username}`);
+      },
+      (error) => {
+        console.error('Erreur lors de l\'envoi des données:', error);
+      }
+    );
   }
 }
