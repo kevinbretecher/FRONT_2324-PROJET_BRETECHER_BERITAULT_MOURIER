@@ -15,8 +15,6 @@ export class AccountComponent implements OnInit {
   /*********** Constructeur ***********/
 
   constructor(
-    private http: HttpClient, 
-    private cookieService: CookieService,
     private router: Router, 
     private route: ActivatedRoute,
     private userService: UserService,
