@@ -1,21 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })
-export class ChatComponent {
+export class ChatComponent implements OnInit {
   messages: any[] = []; // Stocker les messages
   newMessage: string = ''; // Nouveau message saisi par l'utilisateur
-  username: string = 'Francis'; // Le username récupéré depuis la base de données
+  username: string = ''; //Nom d'utilisateur 
+  
+  constructor(private route: ActivatedRoute) {}
 
-  // Fonction pour envoyer un message
+  ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.username = params['username'];
+    });
+  }
+
   sendMessage() {
     if (this.newMessage.trim() !== '') {
       const currentTime = new Date();
       const fullMessage = {
-        sender: this.username,
+        sender: this.username, // Utilisation de votre nom d'utilisateur
         timestamp: currentTime,
         content: this.newMessage
       };
