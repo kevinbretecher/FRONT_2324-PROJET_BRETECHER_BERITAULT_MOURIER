@@ -12,7 +12,7 @@
                             <div class="wrap-form-group">
                                 <div class="column-form-group">
                                     <div class="form-group">
-                                        <img id="avatarImage" [src]="img.image" width="80px" height="80px" alt="Avatar">
+                                        <img id="avatarImage" [src]="this.img.image" width="80px" height="80px" alt="Avatar">
                                     </div>
                                     <div class="form-group">
                                         <input #fileInput type="file" accept="image/*" (change)="changeImage($event)" style="display: none;">
@@ -20,29 +20,29 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="firstname">Prénom</label>
-                                        <p>Francis</p>
+                                        <p>{{ userInfo.firstname }}</p>
                                     </div>
                                     <div class="form-group">
                                         <label for="birthdate">Date de naissance</label>
-                                        <p>04/08/1984</p>
+                                        <p>{{ userInfo.birthdate }}</p>
                                     </div>
                                 </div>
                                 <div class="column-form-group">
                                     <div class="form-group">
                                         <label for="statut">Statut</label>
-                                        <p>Admin</p>
+                                        <p>{{ userInfo.admin }}</p>
                                     </div>
                                     <div class="form-group">
                                         <label for="username">Nom d'utilisateur</label>
-                                        <p>Fralito</p>
+                                        <p>{{ userInfo.username }}</p>
                                     </div>
                                     <div class="form-group">
                                         <label for="name">Nom</label>
-                                        <p>DELATOUR</p>
+                                        <p>{{ userInfo.name }}</p>
                                     </div>
                                     <div class="form-group">
                                         <label for="email">Adresse mail</label>
-                                        <p>francis.delatour@gmail.com</p>
+                                        <p>{{ userInfo.email }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -88,7 +88,7 @@
                     <div class="form-group">
                         <div class="card" id="listEventFav" *ngIf="isVisible">
                             <div class="wrapper">
-                                <div class="cardEvent" routerLink="/event-detail">
+                                <div class="cardEvent" (click)="navigateTo('/user-homepage/' + username + '/event-detail')">
                                     <div class="card-imageEvent">
                                         <img class="logo-and-button" [src]="logo.image" [title]="logo.title" [style.width.px]="logo.imageWidth">
                                         <p style="color: black;">Football</p>
@@ -105,7 +105,7 @@
                                 </div>
                             </div>
                             <div class="wrapper">
-                                <div class="cardEvent" routerLink="/event-detail">
+                                <div class="cardEvent" (click)="navigateTo('/user-homepage/' + username + '/event-detail')">
                                     <div class="card-imageEvent">
                                         <img class="logo-and-button" [src]="logo.image" [title]="logo.title" [style.width.px]="logo.imageWidth">
                                         <p style="color: black;">Football</p>

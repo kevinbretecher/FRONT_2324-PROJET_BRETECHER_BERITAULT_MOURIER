@@ -8,10 +8,21 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class UserHomepageComponent {
 
-  username: any;
-  
+  /*********** Constructeur ***********/
+
   constructor(private route: ActivatedRoute) {}
 
+
+
+  /*********** Variables ***********/
+
+  username: any;    // Nom d'utilisateur
+
+
+
+  /*********** Méthodes ***********/
+  
+  // Permet de récupérer le nom d'utilisateur présent dans l'URL
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.username = params['username'];

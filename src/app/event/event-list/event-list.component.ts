@@ -7,27 +7,43 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./event-list.component.css']
 })
 export class EventListComponent {
-  eventName = '';
-  max = '';
-  min = '';
-  currentUrl: string;
-  username: any;
 
-  constructor(private router: Router, private route: ActivatedRoute) {
+  /*********** Constructeur ***********/
+
+  constructor(
+    private router: Router, 
+    private route: ActivatedRoute
+  ) {
     this.currentUrl = this.router.url;
   }
+
+
+
+  /*********** Variables ***********/
+
+  eventName = '';         // Nom de l'event
+  max = '';               // Prix max de l'event
+  min = '';               // Prix min de l'event
+  currentUrl: string;     // URL de la page
+  username: any;          // Nom d'utilisateur
   
-  // Caractéristiques du logo
+  // Image utilisée dans l'affichage des events
   logo : any = {
     imageWidth : 130,
     imageTitle : "Image",
     image : "assets/images/logo.svg"
   };
 
+
+
+  /*********** Méthodes ***********/
+  
+  // Méthode pour passer à une autre URL
   navigateTo(url: string) {
     this.router.navigateByUrl(url);
   }
-
+  
+  // Permet de récupérer le nom d'utilisateur présent dans l'URL
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.username = params['username'];

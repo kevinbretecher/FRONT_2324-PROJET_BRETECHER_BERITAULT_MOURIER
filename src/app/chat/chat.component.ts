@@ -7,12 +7,15 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent implements OnInit {
+  /*********** Variables ***********/
   messages: any[] = []; // Stocker les messages
   newMessage: string = ''; // Nouveau message saisi par l'utilisateur
   username: string = ''; //Nom d'utilisateur 
   
+  /*********** Constructeur ***********/
   constructor(private route: ActivatedRoute) {}
 
+  /*********** Méthodes ***********/
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.username = params['username'];

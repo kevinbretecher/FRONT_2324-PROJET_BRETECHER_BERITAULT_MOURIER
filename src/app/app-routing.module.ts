@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
+// Component
 import { HomeComponent } from './home/home.component';
 import { AuthenticationComponent } from './authentication/authentication.component';
 import { UserHomepageComponent } from './user-homepage/user-homepage.component';
@@ -18,8 +20,9 @@ const routes: Routes = [
   { path: 'event-detail', component: EventDetailComponent },
   { path: 'user-homepage/:username/event-detail', component: EventDetailComponent },
   { path: 'event-add', component: EventAddComponent },
-  { path: 'event-edit', component: EventAddComponent },
   { path: 'user-homepage/:username/event-add', component: EventAddComponent },
+  { path: 'event-edit', component: EventAddComponent },
+  { path: 'user-homepage/:username/event-edit', component: EventAddComponent },
   { path: 'conversation', component: ConversationComponent },
   { path: 'user-homepage/:username/conversation', component: ConversationComponent },
   { path: 'chat', component: ChatComponent },

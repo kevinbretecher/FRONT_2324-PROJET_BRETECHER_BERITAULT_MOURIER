@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { CookieService } from 'ngx-cookie-service';
+import { UserService } from '../services/user/user.service';
 
 @Component({
   selector: 'app-authentication',
@@ -11,14 +13,32 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class AuthenticationComponent {
 
-  formData: any = {};
+  /*********** Constructeur ***********/
 
-  constructor(private router: Router, private http: HttpClient, private snackBar: MatSnackBar) {}
+  constructor(
+    private router: Router, 
+    private http: HttpClient, 
+    private snackBar: MatSnackBar, 
+    private cookieService: CookieService,
+    private userService: UserService
+  ) {}
 
+
+
+  /*********** Variables ***********/
+
+  formData: any = {}; // Données du formulaire de création de compte
+
+
+
+  /*********** Méthodes ***********/
+
+  // Méthode pour passer à une autre URL
   navigateTo(url: string) {
     this.router.navigateByUrl(url);
   }
 
+  // Méthode pour envoyer le formulaire côté serveur / enregistrer en base le nouvel utilisateur
   onSubmit(form: NgForm) {
     const userData = {
       email: this.formData.email,
@@ -29,22 +49,25 @@ export class AuthenticationComponent {
       avatar: this.formData.avatar,
       username: this.formData.username
     };
-
+ 
     if (form.valid) {
-      this.http.post<any>('http://localhost:3000/signup', userData)
-      .subscribe(() => {
-        this.navigateTo(`/user-homepage/${this.formData.username}`);
-      }, (error: HttpResponse<any>) => {
-        if (error.status === 400) {
-          this.snackBar.open('Le nom d\'utilisateur ou l\'e-mail que vous avez renseigné est déjà utilisé.', 'Fermer', {
-            duration: 5000,
-            verticalPosition: 'top'
-          });
-        } else {
-          this.snackBar.open('500 Internal Server Error', 'Fermer', {
-            duration: 5000,
-            verticalPosition: 'top'
-          });
+      this.userService.postSignUp(userData).subscribe({
+        next: (response) => {
+          this.cookieService.set('authenticationToken', response.token, undefined, '/', undefined, true, 'Strict');
+          this.navigateTo(`/user-homepage/${response.username}`);
+        },
+        error: (error) => {
+          if (error.status === 400) {
+            this.snackBar.open('Le nom d\'utilisateur ou l\'e-mail que vous avez renseigné est déjà utilisé.', 'Fermer', {
+              duration: 5000,
+              verticalPosition: 'top'
+            });
+          } else {
+            this.snackBar.open('500 Internal Server Error', 'Fermer', {
+              duration: 5000,
+              verticalPosition: 'top'
+            });
+          }
         }
       });
     }
