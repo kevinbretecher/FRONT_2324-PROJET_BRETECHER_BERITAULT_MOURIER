@@ -9,15 +9,17 @@
                         <!-- Zone pour afficher les messages -->
                         <div class="message-area">
                             <div class="zoneMessage" *ngFor="let message of messages">
-                                <p>{{ message.sender }} - {{ message.timestamp | date: 'HH:mm:ss dd/MM/yyyy' }}</p>
-                                <p id="messageEnvoye">{{ message.content }}</p>
-                            </div>
+                                <div class="message-content" [ngClass]="{ 'received-message': message.sender !== username, 'sent-message': message.sender === username }">
+                                    <p>{{ message.sender }} - {{ message.timestamp | date: 'HH:mm:ss dd/MM/yyyy' }}</p>
+                                    <p id="messageEnvoye">{{ message.content }}</p>
+                                </div>
+                            </div>                            
                         </div>
                     </div>
                     <br>
                     <!-- Zone pour saisir un nouveau message -->
                     <div class="message-input">
-                        <input [(ngModel)]="newMessage" placeholder="Saisissez votre message ici" (keydown.enter)="sendMessage()">
+                        <input [(ngModel)]="newMessage" placeholder=" Saisissez votre message ici" (keydown.enter)="sendMessage()">
                         <button (click)="sendMessage()">Envoyer</button>
                     </div>
                 </div>

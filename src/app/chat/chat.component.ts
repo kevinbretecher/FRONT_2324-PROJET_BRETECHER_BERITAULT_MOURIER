@@ -8,13 +8,14 @@ import { Component } from '@angular/core';
 export class ChatComponent {
   messages: any[] = []; // Stocker les messages
   newMessage: string = ''; // Nouveau message saisi par l'utilisateur
+  username: string = 'Francis'; // Le username récupéré depuis la base de données
 
   // Fonction pour envoyer un message
   sendMessage() {
     if (this.newMessage.trim() !== '') {
       const currentTime = new Date();
       const fullMessage = {
-        sender: 'Francis', // Mettez le nom de l'utilisateur actuel ici
+        sender: this.username,
         timestamp: currentTime,
         content: this.newMessage
       };

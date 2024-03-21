@@ -123,3 +123,20 @@ body {
       #messageEnvoye{
         font-size: 16px;
       }
+
+      .message-content {
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+    }
+    
+    .received-message {
+        background-color: #3F5569;
+        text-align: left;
+    }
+    
+    .sent-message {
+        background-color: #3F5569;
+        text-align: right;
+    }
+    
