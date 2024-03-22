@@ -28,6 +28,7 @@ export class ConversationService {
   }
 
   getUsers(): Observable<any> {
+    this.socket.emit('allUsers');
     return new Observable(observer => {
       this.socket.on('allUsers', (users) => {
         observer.next(users);

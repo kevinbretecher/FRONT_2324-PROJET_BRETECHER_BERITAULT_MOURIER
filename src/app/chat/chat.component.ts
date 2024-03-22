@@ -31,8 +31,8 @@ export class ChatComponent implements OnInit {
       if (this.selectedUser) {
         this.conversation.fetchMessagesFromServer(this.selectedUser._id);
         this.messageSubscription = this.conversation.listenForMessages().subscribe((message : any) => {
+          message.timestamp = new Date(message.date);
           this.messages.push(message);
-          //this.conversation.fetchMessagesFromServer(message.senderId);
         });
       }
     });
@@ -49,7 +49,6 @@ export class ChatComponent implements OnInit {
       this.messages.push(fullMessage);
       this.newMessage = '';
       this.conversation.sendMessageToServer(this.selectedUser._id, fullMessage.content);
-      //this.conversation.sendMessageToServer(fullMessage);
     }
   }
 

@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ConversationService } from 'src/app/services/conversation/conversation.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-conversation',
@@ -12,8 +14,7 @@ export class ConversationComponent implements OnInit{
     /*********** Variables ***********/
     users: any[] = [];
     username : any;
-    //userPairs: any[][] = [];              //pour faire 2 colonnes 
-
+    private usersSubscription : Subscription = new Subscription();
 
   /*********** Constructeur ***********/
   constructor(private conversation: ConversationService, 
@@ -23,27 +24,30 @@ export class ConversationComponent implements OnInit{
 
   /*********** Méthodes ***********/
   ngOnInit(): void {
-    this.conversation.getUsers().subscribe(users => {
-      this.users = users.filter((user: any) => user.username !== this.username);
-      //this.userPairs = this.chunkArray(this.users, 2);        //pour faire 2 colonnes 
-    });
     this.route.params.subscribe(params => {
       this.username = params['username'];
+      this.fetchUsers();
     });
   } 
 
-  //  pour faire 2 colonnes 
-  /*chunkArray(array: any[], size: number): any[][] {
-    const chunkedArray = [];
-    for (let i = 0; i < array.length; i += size) {
-      chunkedArray.push(array.slice(i, i + size));
+  fetchUsers(): void {
+    if (this.usersSubscription) {
+      this.usersSubscription.unsubscribe();
     }
-    return chunkedArray;
-  }*/
+    this.usersSubscription = this.conversation.getUsers().subscribe(users => {
+      this.users = users.filter((user: any) => user.username !== this.username);
+    });
+  }
 
   goToChatPage(user:any): void {
     this.conversation.setSelectedUser(user);
     this.conversation.sendUserIdToServer(user._id);
     this.router.navigate(['/user-homepage', this.username, 'chat']);
+  }
+
+  ngOnDestroy(): void {
+    if (this.usersSubscription) {
+      this.usersSubscription.unsubscribe();
+    }
   }
 }
