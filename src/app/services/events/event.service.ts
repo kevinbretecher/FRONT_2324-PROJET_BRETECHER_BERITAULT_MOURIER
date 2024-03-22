@@ -20,6 +20,8 @@ export class EventService {
   localUrl: string = 'http://localhost:3000/';
   publicUrl : string = 'https://back-2324-projet-bretecher-beritault.onrender.com/'
 
+
+  
   /*********** Services ***********/
 
   // Récupérer tous les events

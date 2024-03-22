@@ -1,7 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IEvent } from 'src/app/services/events/event.interface';
 import { EventService } from 'src/app/services/events/event.service';
 
 
@@ -57,14 +56,22 @@ export class EventAddComponent {
     this.router.navigateByUrl(url);
   }
 
-  // Permet d'afficher la page d'ajout ou d'édition d'event en fonction de l'URL
-  // Permet de récupérer le username et l'id de l'event situés dans l'URL
+  // Méthodes initialisées au démarrage de la page
   ngOnInit(): void {
+    this.getInfosFromUrl();
+    this.displayGoodEventView();
+  }
+
+  // Méthode pour récupérer les infos contenues dans l'url
+  getInfosFromUrl(): void {
     this.route.params.subscribe(params => {
       this.username = params['username'];
       this.eventId = params['eventId'];
     });
+  }
 
+  // Méthode pour afficher la page d'ajout ou de modification d'url en fonction de l'url
+  displayGoodEventView(): void {
     this.route.url.subscribe(url => {
       if (url[2].path === 'event-add') {
         this.showAddView = true;

@@ -44,16 +44,9 @@ export class AccountComponent implements OnInit {
   img : any = { image : "" }  // Image pour l'avatar
   username: any;              // Nom d'utilisateur
 
-  events: IEvent[] = [];   // Liste d'event
-  favorites: any;
-  eventCreated : any;
-
-  // Image utilisée dans l'affichage des events
-  logo : any = {
-    imageWidth : 130,
-    imageTitle : "Image",
-    image : "assets/images/logo.svg"
-  };
+  events: IEvent[] = [];      // Liste d'event
+  favorites: any;             // Event en favoris
+  eventCreated : any;         // Event créés par l'utilisateur
 
   // Tableau contenant les chemins des images correspondant à chaque thème
   themeImages: ThemeImages = {
@@ -73,22 +66,33 @@ export class AccountComponent implements OnInit {
     this.router.navigateByUrl(url);
   }
 
-  // Permet de récupérer les informations du profil au chargement du composant
-  // Permet de récupérer le nom d'utilisateur présent dans l'URL
+  // Méthodes initialisées au démarrage de la page
   ngOnInit() {
     this.fetchProfile();
-    this.route.params.subscribe(params => {
-      this.username = params['username'];
-    });
+    this.getUsernameFromURL();
+    this.getAllEvents();
+    this.getAllEventsAddedInFavorite();
+  }
 
-    this.eventService.getAllEvents().subscribe(events => {
-      this.events = events;
-    });
-
-
+  // Méthode pour récupérer tous les évènements que l'utilisateur a ajouté en favori
+  getAllEventsAddedInFavorite(): void {
     this.eventService.getEventFavorite().subscribe(favorites => {
       this.favorites = favorites;
       this.eventCreated = favorites.filter((event: { owner: any; }) => event.owner === this.userInfo._id);
+    });
+  }
+  
+  // Méthode pour récupérer tous les évènements
+  getAllEvents(): void {
+    this.eventService.getAllEvents().subscribe(events => {
+      this.events = events;
+    });
+  }
+
+  // Méthode pour récupérer le nom d'utilisateur présent dans l'URL
+  getUsernameFromURL(): void {
+    this.route.params.subscribe(params => {
+      this.username = params['username'];
     });
   }
 
@@ -108,13 +112,13 @@ export class AccountComponent implements OnInit {
     });
   }
 
-  // Méthode pour afficher / cacher events
+  // Méthode pour afficher / cacher events en favoris
   isEventFavoriVisible: boolean = false;
   displayEventsFavorite(): void {
     this.isEventFavoriVisible = !this.isEventFavoriVisible;
   }
 
-  // Méthode pour afficher / cacher events
+  // Méthode pour afficher / cacher events créés par le user
   isEventCreatedVisible: boolean = false;
   displayEventsCreated(): void {
     this.isEventCreatedVisible = !this.isEventCreatedVisible;

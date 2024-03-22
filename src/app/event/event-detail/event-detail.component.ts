@@ -33,7 +33,7 @@ export class EventDetailComponent {
   theme!: 'Sport' | 'Culture' | 'Festif' | 'Pro' | 'Autres';                 // Thème de l'event
   price = '';                                                                // Prix de l'event
 
-  buttonClicked: boolean = false;
+  buttonClicked: boolean = false;                                            // Bouton ajout en favori
 
   // Tableau contenant les chemins des images correspondant à chaque thème
   themeImages = {
@@ -63,7 +63,7 @@ export class EventDetailComponent {
     });
   }
 
-  // Méthode pour récupérer les informations du profil depuis le serveur
+  // Méthode pour récupérer les informations de l'event
   getEventDetails(eventId: string): void {
     this.eventService.getEventById(eventId).subscribe({
       next: (response) => {
@@ -75,7 +75,7 @@ export class EventDetailComponent {
         this.price = response.price;
       },
       error: () => {
-        this.snackBar.open('Un problème est survenu lors du chargement de votre profil.', 'Fermer', {
+        this.snackBar.open('Un problème est survenu lors du chargement des informations de l\'event.', 'Fermer', {
           duration: 5000,
           verticalPosition: 'top'
         });

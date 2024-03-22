@@ -45,22 +45,14 @@ export class EventListComponent implements OnInit {
   min = '';               // Prix min de l'event
   currentUrl: string;     // URL de la page
   username: any;          // Nom d'utilisateur
-  events: IEvent[] = [];   // Liste d'event
-
-  // Image utilisée dans l'affichage des events
-  logo : any = {
-    imageWidth : 130,
-    imageTitle : "Image",
-    image : "assets/images/logo.svg"
-  };
+  events: IEvent[] = [];  // Liste d'event
 
   name = '';                                                              // Nom de l'event
   date = '';                                                              // Date sélectionnée
   theme!: 'Sport' | 'Culture' | 'Festif' | 'Pro' | 'Autres';              // Thème
   price = '';                                                             // Prix
 
-  filteredEvents: IEvent[] = []; // Liste d'événements filtrés
-
+  filteredEvents: IEvent[] = [];                                          // Liste d'événements filtrés
 
   // Tableau contenant les chemins des images correspondant à chaque thème
   themeImages: ThemeImages = {
