@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ConversationService } from 'src/app/services/conversation/conversation.service';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-chat',
@@ -8,30 +11,49 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ChatComponent implements OnInit {
   /*********** Variables ***********/
-  messages: any[] = []; // Stocker les messages
-  newMessage: string = ''; // Nouveau message saisi par l'utilisateur
-  username: string = ''; //Nom d'utilisateur 
+  messages: any[] = []; 
+  newMessage: string = '';
+  username: string = '';
+  selectedUser: any;
+  //receivedMessages: any[] = [];
+  messageSubscription: Subscription = new Subscription();
+
   
   /*********** Constructeur ***********/
-  constructor(private route: ActivatedRoute) {}
+  constructor(private conversation: ConversationService, 
+              private route: ActivatedRoute) {}
 
   /*********** Méthodes ***********/
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.username = params['username'];
+      this.selectedUser = this.conversation.getSelectedUser();
+      if (this.selectedUser) {
+        this.conversation.fetchMessagesFromServer(this.selectedUser._id);
+        this.messageSubscription = this.conversation.listenForMessages().subscribe((message : any) => {
+          message.timestamp = new Date(message.date);
+          this.messages.push(message);
+        });
+      }
     });
   }
 
-  sendMessage() {
+  sendMessage(): void {
     if (this.newMessage.trim() !== '') {
       const currentTime = new Date();
       const fullMessage = {
-        sender: this.username, // Utilisation de votre nom d'utilisateur
+        sender: this.username, 
         timestamp: currentTime,
         content: this.newMessage
       };
-      this.messages.push(fullMessage); // Ajouter le message à la liste des messages
-      this.newMessage = ''; // Réinitialiser la zone de saisie du message
+      this.messages.push(fullMessage);
+      this.newMessage = '';
+      this.conversation.sendMessageToServer(this.selectedUser._id, fullMessage.content);
     }
+  }
+
+  ngOnDestroy(): void {
+    console.log("Destroy Chat");
+    this.messageSubscription.unsubscribe();
   }
 }
