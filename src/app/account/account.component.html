@@ -29,7 +29,7 @@
                                 </div>
                                 <div class="column-form-group">
                                     <div class="form-group">
-                                        <label for="statut">Statut</label>
+                                        <label for="statut">Admin</label>
                                         <p>{{ userInfo.admin }}</p>
                                     </div>
                                     <div class="form-group">
@@ -47,77 +47,94 @@
                                 </div>
                             </div>
                       </form>
+                      <hr>
+                      <div class="wrap-form-group">
+                        <div class="column-form-group">
                             <div class="form-group">
-                            <label for="listEvent">Liste des évènements créés</label>
-                            <div class="card" id="listEventCreated">
-                                <p class="textNoEvent">Aucun évènement créé</p>
-                                <!--<div class="wrapper">
-                                    <div class="cardEvent" routerLink="/event-detail">
-                                        <div class="card-imageEvent">
-                                            <img class="logo-and-button" [src]="logo.image" [title]="logo.title" [style.width.px]="logo.imageWidth">
-                                            <p style="color: black;">Football</p>
-                                        </div>
-                                        <div style="margin: auto; display: flex;">
-                                            <p style="color: black;">120€</p>
-                                        </div>
-                                        <div style="margin: auto; display: flex; margin-right: 50px;">
-                                            <p style="color: black;">11/03/2024</p>
-                                        </div>
-                                        <div style="margin: auto; margin-right: 55px;">
-                                            <p style="color: black;">Sport</p>
-                                        </div>
-                                    </div>
-                                </div>-->                                   
+                                <label for="nbEventFav">Liste des évènements créés</label>
                             </div>
                         </div>
+                        <div class="column-form-group">
+                            <div class="form-group">
+                                <button (click)="displayEventsCreated()" type="button">
+                                    Afficher les évènements créés
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="form-group">
+                            <div class="wrapper" *ngIf="isEventCreatedVisible">
+                                <div class="cardEvent">
+                                    <div style="margin: auto;">
+                                        <p style="color: black;">Nom de l'événement</p>
+                                    </div>
+                                    <div style="margin: auto; display: flex;">
+                                        <div style="display: contents;">
+                                            <p style="color: black;">Prix</p>
+                                        </div>
+                                    </div>
+                                    <div style="margin: auto; display: flex;">
+                                        <div style="display: contents;">
+                                            <p style="color: black;">Date</p>
+                                        </div>
+                                    </div>
+                                    <div style="margin: auto;">
+                                        <p style="color: black;">Thème</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card" id="listEventCreated" *ngIf="isEventCreatedVisible">
+                                <div class="wrapper" *ngFor="let event of eventCreated">
+                                    <div class="cardEvent" (click)="navigateTo('/user-homepage/' + username + '/event-detail/' + event._id)">
+                                        <div class="card-imageEvent">
+                                            <img class="logo-and-button" id="eventImage" [src]="themeImages[event.theme]" *ngIf="themeImages[event.theme]" width="150px" height="100px" alt="">
+                                            <p style="color: black;">{{ event.name }}</p>
+                                        </div>
+                                        <div style="margin: auto; display: flex;">
+                                            <p style="color: black;">{{ event.price }}€</p>
+                                        </div>
+                                        <div style="margin: auto; display: flex; margin-right: 50px;">
+                                            <p style="color: black;">{{ event.date }}</p>
+                                        </div>
+                                        <div style="margin: auto; margin-right: 55px;">
+                                            <p style="color: black;">{{ event.theme }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
                     <div class="wrap-form-group">
                         <div class="column-form-group">
                             <div class="form-group">
                                 <label for="nbEventFav">Nombre d'évènements en favoris: </label>
-                                <p>2</p>
+                                <p *ngIf="isEventFavoriVisible">{{ favorites.length }}</p>
                             </div>
                         </div>
                         <div class="column-form-group">
                             <div class="form-group">
-                                <button (click)="toggleVisibility()" type="button">
+                                <button (click)="displayEventsFavorite()" type="button">
                                     Afficher les évènements
                                 </button>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="card" id="listEventFav" *ngIf="isVisible">
-                            <div class="wrapper">
-                                <div class="cardEvent" (click)="navigateTo('/user-homepage/' + username + '/event-detail')">
+                        <div class="card" id="listEventFav" *ngIf="isEventFavoriVisible">
+                            <div class="wrapper" *ngFor="let favorite of favorites">
+                                <div class="cardEvent" (click)="navigateTo('/user-homepage/' + username + '/event-detail/' + favorite._id)">
                                     <div class="card-imageEvent">
-                                        <img class="logo-and-button" [src]="logo.image" [title]="logo.title" [style.width.px]="logo.imageWidth">
-                                        <p style="color: black;">Football</p>
+                                        <img class="logo-and-button" id="eventImage" [src]="themeImages[favorite.theme]" *ngIf="themeImages[favorite.theme]" width="150px" height="100px" alt="">
+                                        <p style="color: black;">{{ favorite.name }}</p>
                                     </div>
                                     <div style="margin: auto; display: flex;">
-                                        <p style="color: black;">120€</p>
+                                        <p style="color: black;">{{ favorite.price }}€</p>
                                     </div>
                                     <div style="margin: auto; display: flex; margin-right: 50px;">
-                                        <p style="color: black;">11/03/2024</p>
+                                        <p style="color: black;">{{ favorite.date }}</p>
                                     </div>
                                     <div style="margin: auto; margin-right: 55px;">
-                                        <p style="color: black;">Sport</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="wrapper">
-                                <div class="cardEvent" (click)="navigateTo('/user-homepage/' + username + '/event-detail')">
-                                    <div class="card-imageEvent">
-                                        <img class="logo-and-button" [src]="logo.image" [title]="logo.title" [style.width.px]="logo.imageWidth">
-                                        <p style="color: black;">Football</p>
-                                    </div>
-                                    <div style="margin: auto; display: flex;">
-                                        <p style="color: black;">120€</p>
-                                    </div>
-                                    <div style="margin: auto; display: flex; margin-right: 50px;">
-                                        <p style="color: black;">11/03/2024</p>
-                                    </div>
-                                    <div style="margin: auto; margin-right: 55px;">
-                                        <p style="color: black;">Sport</p>
+                                        <p style="color: black;">{{ favorite.theme }}</p>
                                     </div>
                                 </div>
                             </div>

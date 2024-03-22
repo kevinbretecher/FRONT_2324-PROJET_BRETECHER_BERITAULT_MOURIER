@@ -22,16 +22,17 @@
         <div class="dense-2">
             <mat-form-field appearance="outline" class="example-width">
                 <mat-label>Thème</mat-label>
-                <mat-select>
-                  <mat-option value="one">Sport</mat-option>
-                  <mat-option value="two">Culture</mat-option>
-                  <mat-option value="three">Festif</mat-option>
-                  <mat-option value="four">Pro</mat-option>
-                  <mat-option value="five">Autres</mat-option>
+                <mat-select [(ngModel)]="theme">
+                    <mat-option value="">Tous les thèmes</mat-option>
+                    <mat-option value="Sport">Sport</mat-option>
+                    <mat-option value="Culture">Culture</mat-option>
+                    <mat-option value="Festif">Festif</mat-option>
+                    <mat-option value="Pro">Pro</mat-option>
+                    <mat-option value="Autres">Autres</mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
-        <button type="submit">Filtrer</button>
+        <button type="button" (click)="filterEvents()">Filtrer</button>
     </div>
 </div>
 <div class="wrapper">
@@ -40,7 +41,7 @@
         <div style="margin: auto; display: flex;">
             <div style="display: contents;">
                 <p>Prix</p>
-                <button type="submit" class="sort-button">
+                <button type="button" (click)="sortEvents('price')" class="sort-button">
                     <mat-icon>swap_vert</mat-icon>
                 </button>
             </div>
@@ -48,7 +49,7 @@
         <div style="margin: auto; display: flex;">
             <div style="display: contents;">
                 <p>Date</p>
-                <button type="submit" class="sort-button">
+                <button type="button" (click)="sortEvents('price')" class="sort-button">
                     <mat-icon>swap_vert</mat-icon>
                 </button>
             </div>
@@ -56,10 +57,10 @@
         <div style="margin: auto;"><p>Thème</p></div>
     </div>
 </div>
-<div class="wrapper" *ngFor="let event of events">
+<div class="wrapper" *ngFor="let event of filteredEvents">
     <div class="card" (click)="navigateTo('/user-homepage/' + username + '/event-detail/' + event._id)">
         <div class="card-image">
-            <img class="logo-and-button" [src]="logo.image" [title]="logo.title" [style.width.px]="logo.imageWidth">
+            <img id="eventImage" [src]="themeImages[event.theme]" *ngIf="themeImages[event.theme]" width="150px" height="100px" alt="">
             <p>{{ event.name }}</p>
         </div>
         <div style="margin: auto; display: flex;">

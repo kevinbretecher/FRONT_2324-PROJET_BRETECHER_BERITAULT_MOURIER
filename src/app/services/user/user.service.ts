@@ -16,20 +16,23 @@ export class UserService {
     private http: HttpClient
   ) {}
 
+  localUrl: string = 'http://localhost:3000/';
+  publicUrl : string = 'https://back-2324-projet-bretecher-beritault.onrender.com/'
+
 
 
   /*********** Services ***********/
 
   // Vérifier que l'utilisateur est bien existant en base
   postLogin(userData: { email: any; password: any; }): Observable<any> {
-    return this.http.post<any>('http://localhost:3000/login', userData, { observe: 'response' }).pipe(
+    return this.http.post<any>( this.publicUrl + 'login', userData, { observe: 'response' }).pipe(
       catchError(this.handleError)
     );
   }
 
   // Ajout d'un nouvel utilisateur en base
   postSignUp(userData: { email: any; password: any; firstname: any; name: any; birthdate: any; avatar: any; username: any; }): Observable<any> {
-    return this.http.post<any>('http://localhost:3000/signup', userData).pipe(
+    return this.http.post<any>( this.publicUrl + 'signup', userData).pipe(
       catchError(this.handleError)
     );
   }
@@ -37,7 +40,7 @@ export class UserService {
   // Récupérer les informations de l'utilisateur
   getProfile(): Observable<any> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.getTokenFromCookie()}`);
-    return this.http.get<any>('http://localhost:3000/profile', { headers }).pipe(
+    return this.http.get<any>( this.publicUrl + 'profile', { headers }).pipe(
       catchError(this.handleError)
     );
   }
@@ -45,7 +48,7 @@ export class UserService {
   // Modifier le profil (l'avatar)
   postProfile(base64Image: string): Observable<any> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.getTokenFromCookie()}`);
-    return this.http.post<any>('http://localhost:3000/profile', { avatar: base64Image }, { headers: headers }).pipe(
+    return this.http.post<any>( this.publicUrl + 'profile', { avatar: base64Image }, { headers: headers }).pipe(
       catchError(this.handleError)
     );
   }

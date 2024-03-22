@@ -17,14 +17,15 @@ export class EventService {
     private http: HttpClient
   ) {}
 
-
+  localUrl: string = 'http://localhost:3000/';
+  publicUrl : string = 'https://back-2324-projet-bretecher-beritault.onrender.com/'
 
   /*********** Services ***********/
 
   // Récupérer tous les events
   getAllEvents(): Observable<IEvent[]> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.getTokenFromCookie()}`);
-    return this.http.get<IEvent[]>('http://localhost:3000/events', { headers }).pipe(
+    return this.http.get<IEvent[]>( this.publicUrl + 'events', { headers }).pipe(
       catchError(this.handleError)
     );
   }
@@ -32,7 +33,7 @@ export class EventService {
   // Créer un nouvel event
   postNewEvent(event: IEvent): Observable<IEvent[]> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.getTokenFromCookie()}`);
-    return this.http.post<IEvent[]>('http://localhost:3000/events/new', event, { headers: headers }).pipe(
+    return this.http.post<IEvent[]>( this.publicUrl + 'events/new', event, { headers: headers }).pipe(
       catchError(this.handleError)
     );
   }
@@ -40,7 +41,7 @@ export class EventService {
   // Modifier un event
   postModifyEvent(event: IEvent): Observable<IEvent[]> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.getTokenFromCookie()}`);
-    return this.http.post<IEvent[]>(`http://localhost:3000/events/${event._id}/edit`, event, { headers: headers }).pipe(
+    return this.http.post<IEvent[]>( this.publicUrl + `events/${event._id}/edit`, event, { headers: headers }).pipe(
       catchError(this.handleError)
     );
   }
@@ -48,7 +49,31 @@ export class EventService {
   // Récupérer event avec son id
   getEventById(eventId: string): Observable<any> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.getTokenFromCookie()}`);
-    return this.http.get<any>(`http://localhost:3000/events/${eventId}`, { headers }).pipe(
+    return this.http.get<any>( this.publicUrl + `events/${eventId}`, { headers }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  // Ajouter en favori un event
+  addEventFavorite(eventId: string): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.getTokenFromCookie()}`);
+    return this.http.get<any>( this.publicUrl + `events/${eventId}/favorite`, { headers }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  // Récupérer les favoris de l'utilisateur
+  getEventFavorite(): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.getTokenFromCookie()}`);
+    return this.http.get<any>( this.publicUrl + 'events/profile', { headers }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  // Trier et filtrer la liste d'évènement
+  getAllEventsFilterSort(filterOption: any, sortOption: any): Observable<IEvent[]> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.getTokenFromCookie()}`);
+    return this.http.post<IEvent[]>( this.publicUrl + 'events', { filterOption, sortOption }, { headers }).pipe(
       catchError(this.handleError)
     );
   }

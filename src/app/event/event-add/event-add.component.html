@@ -28,9 +28,7 @@
                                     </mat-form-field>
                                 </div>
                                 <div class="form-group">
-                                    <p>Choix image :</p>
-                                    <input #fileInput type="file" (change)="changeImage($event)" style="display: none;">
-                                    <button (click)="openFilePicker()">Choisir une image</button>
+                                    <p>Image :</p>
                                 </div>
                             </div>
                             <div class="column-form-group">
@@ -55,13 +53,13 @@
                                     </mat-form-field>
                                 </div>
                                 <div class="form-group">
-                                    <img id="avatarImage" [src]="img.image" width="300px" height="200px" alt="">
+                                    <img id="eventImage" [src]="themeImages[theme]" *ngIf="themeImages[theme]" width="250px" height="200px" alt="">
                                 </div>
                             </div>
                         </div>
                         <div class="button-container">
                             <button type="submit" (click)="submitFormAdd()">Ajouter</button>
-                            <button type="submit">Annuler</button>
+                            <button type="submit" (click)="navigateTo('/user-homepage/' + username)">Annuler</button>
                         </div>
                     </div>
                 </div>
@@ -76,7 +74,7 @@
                                     <p>Nom de l'évènement :</p>
                                     <mat-form-field appearance="outline">
                                         <mat-label class="placeholder">Nom de l'événement</mat-label>
-                                        <input matInput type="text" [(ngModel)]="this.eventInfo.name">
+                                        <input matInput type="text" [(ngModel)]="eventName">
                                           <button matSuffix mat-icon-button *ngIf="eventName" aria-label="Clear" (click)="eventName=''">
                                             <mat-icon>close</mat-icon>
                                           </button>
@@ -86,15 +84,13 @@
                                     <p>Date :</p>
                                     <mat-form-field appearance="outline" class="example-margin example-width">
                                         <mat-label>Date</mat-label>
-                                        <input matInput [matDatepicker]="picker" [(ngModel)]="this.eventInfo.date" (click)="picker.open()">
+                                        <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate" (click)="picker.open()">
                                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                         <mat-datepicker #picker></mat-datepicker>
                                     </mat-form-field>
                                 </div>
                                 <div class="form-group">
-                                    <p>Choix image :</p>
-                                    <input #fileInput type="file" (change)="changeImage($event)" style="display: none;">
-                                    <button (click)="openFilePicker()">Choisir une image</button>
+                                    <p>Image :</p>
                                 </div>
                             </div>
                             <div class="column-form-group">
@@ -102,14 +98,14 @@
                                     <p>Prix :</p>
                                     <mat-form-field appearance="outline" class="example-margin example-width">
                                         <mat-label>Prix</mat-label>
-                                        <input matInput type="number" [(ngModel)]="this.eventInfo.price">
+                                        <input matInput type="number" [(ngModel)]="prix">
                                     </mat-form-field>
                                 </div>
                                 <div class="form-group">
                                     <p>Thème :</p>
                                     <mat-form-field appearance="outline" class="example-width">
                                         <mat-label>Thème</mat-label>
-                                        <mat-select [(ngModel)]="this.eventInfo.theme">
+                                        <mat-select [(ngModel)]="theme">
                                             <mat-option value="Sport">Sport</mat-option>
                                             <mat-option value="Culture">Culture</mat-option>
                                             <mat-option value="Festif">Festif</mat-option>
@@ -119,7 +115,7 @@
                                     </mat-form-field>
                                 </div>
                                 <div class="form-group">
-                                    <img id="avatarImage" [src]="img.image2" width="300px" height="200px" alt="">
+                                    <img id="eventImage" [src]="themeImages[theme]" *ngIf="themeImages[theme]" width="250px" height="200px" alt="">
                                 </div>
                             </div>
                         </div>
