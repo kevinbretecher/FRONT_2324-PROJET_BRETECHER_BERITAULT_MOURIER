@@ -8,8 +8,8 @@
                     <div class="card" style="background-color: #3F5569;">
                         <div class="message-area">
                             <div class="zoneMessage" *ngFor="let message of messages">
-                                <div class="message-content" [ngClass]="{ 'received-message': message.sender !== username, 'sent-message': message.sender === username }">
-                                    <p>{{ message.sender === username ? username : selectedUser.username }} - {{ message.timestamp | date: 'HH:mm:ss dd/MM/yyyy' }}</p>
+                                <div class="message-content" [ngClass]="{ 'received-message': message.sender === selectedUser._id, 'sent-message': message.sender !== selectedUser._id }">
+                                    <p>{{ message.sender !== selectedUser._id ? username : selectedUser.username }} - {{ message.timestamp | date: 'HH:mm:ss dd/MM/yyyy' }}</p>
                                     <p id="messageEnvoye">{{ message.content }}</p>
                                 </div>
                             </div>                            
