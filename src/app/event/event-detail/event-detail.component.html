@@ -8,47 +8,42 @@
                         <div class="wrap-form-group">
                             <div class="column-form-group">
                                 <div class="form-group">
-                                    <img id="avatarImage" src="../../assets/images/foot.jpg" width="300px" height="200px" alt="Logo">
+                                    <img id="eventImage" [src]="themeImages[theme]" *ngIf="themeImages[theme]" width="250px" height="200px" alt="">
                                 </div>
                             </div>
                             <div class="column-form-group">
                                 <div class="form-group">
-                                    <h1 style="color: white;"><u>Football</u></h1>
+                                    <h1 style="color: white;"><u>{{ name }}</u></h1>
                                 </div>
                             </div>
                         </div>
                         <div class="wrap-form-group">
                             <div class="column-form-group">
                                 <div class="form-group">
-                                    <p>Prix: 5€</p>
+                                    <p>Prix: {{ price }}€</p>
                                 </div>
                             </div>
                             <div class="column-form-group">
                                 <div class="form-group">
-                                    <p>Date : 18/03/2024</p>
+                                    <p>Date : {{ date }}</p>
                                 </div>
                             </div>
                             <div class="column-form-group">
                                 <div class="form-group">
-                                    <p>Thème : Sport</p>
+                                    <p>Thème : {{ theme }}</p>
                                 </div>
                             </div>
                         </div>
                         <div>
                             <p class="list"><u>Liste des noms utilisateurs ayant ajouté en favoris cet évènement :</u></p>
-                            <ul class="list">
-                                <li>Fralito</li>
+                            <ul class="list" *ngFor="let favorite of favorites">
+                                <li>{{ favorite }}</li>
                                 <br>
-                                <li>Meazow</li>
-                                <br>
-                                <li>JojoBG</li>
-                                <br>
-                                <li>KevBret</li>
                             </ul>
                         </div>
                         <div class="button-container">
-                            <button type="submit">Editer</button>
-                            <button type="submit">Ajouter aux favoris</button>
+                            <button (click)="navigateTo('/user-homepage/' + username + '/event-edit/' + eventId)">Editer</button>
+                            <button (click)="addEventInFavorite(eventId)" [disabled]="buttonClicked">Ajouter aux favoris</button>
                         </div>
                     </div>
                 </div>

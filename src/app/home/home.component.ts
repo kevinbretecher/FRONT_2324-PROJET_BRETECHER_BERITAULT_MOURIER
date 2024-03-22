@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { UserService } from '../services/user/user.service';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +18,8 @@ export class HomeComponent {
     private router: Router, 
     private http: HttpClient, 
     private snackBar: MatSnackBar, 
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private userService: UserService
   ) {}
 
 
@@ -35,6 +37,17 @@ export class HomeComponent {
     this.router.navigateByUrl(url);
   }
 
+  validateEmail(email: string): boolean {
+    // Expression régulière pour valider l'adresse e-mail
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailPattern.test(email)) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   // Méthode pour envoyer le formulaire côté serveur / vérifier le compte pour connecter l'utilisateur
   onSubmit() {
     const userData = {
@@ -42,26 +55,33 @@ export class HomeComponent {
       password: this.formToConnect.password
     };
 
-    this.http.post<any>('http://localhost:3000/login', userData, { observe: 'response' })
-      .subscribe((response: HttpResponse<any>) => {
-        const responseData = response.body;
-        const token = response.body.token;
-
-        this.cookieService.set('authenticationToken', token, undefined, '/', undefined, true, 'Strict');
-
-        this.navigateTo(`/user-homepage/${responseData.username}`);
-      }, (error: HttpResponse<any>) => {
-        if (error.status === 401) {
-          this.snackBar.open('E-mail ou mot de passe invalide. Veuillez vérifier vos informations.', 'Fermer', {
-            duration: 5000,
-            verticalPosition: 'top'
-          });
-        } else {
-          this.snackBar.open('500 Internal Server Error', 'Fermer', {
-            duration: 5000,
-            verticalPosition: 'top'
-          });
+    if (this.validateEmail(userData.email)) {
+      this.userService.postLogin(userData).subscribe({
+        next: (response: HttpResponse<any>) => {
+          const token = response.body.token;
+          const username = response.body.username;
+          this.cookieService.set('authenticationToken', token, undefined, '/', undefined, true, 'Strict');
+          this.navigateTo(`/user-homepage/${username}`);
+        },
+        error: (error) => {
+          if (error.status === 401) {
+            this.snackBar.open('E-mail ou mot de passe invalide. Veuillez vérifier vos informations.', 'Fermer', {
+              duration: 5000,
+              verticalPosition: 'top'
+            });
+          } else {
+            this.snackBar.open('500 Internal Server Error', 'Fermer', {
+              duration: 5000,
+              verticalPosition: 'top'
+            });
+          }
         }
       });
+    } else {
+      this.snackBar.open('Le format de l\'email est invalide. Veuillez vérifier vos informations.', 'Fermer', {
+        duration: 5000,
+        verticalPosition: 'top'
+      });
+    }
   }
 }

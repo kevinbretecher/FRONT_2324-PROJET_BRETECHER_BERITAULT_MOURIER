@@ -77,6 +77,6 @@ button:hover {
     margin: auto; 
     display: flex; 
     align-items: center; 
-    margin-left: 10px; 
+    margin: 10px;
     margin-right: 50px;
-}
+} 
