@@ -2,6 +2,20 @@ import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../services/user/user.service'; 
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { EventService } from '../services/events/event.service';
+import { IEvent } from '../services/events/event.interface';
+
+export enum Theme {
+  Sport = 'Sport',
+  Culture = 'Culture',
+  Festif = 'Festif',
+  Pro = 'Pro',
+  Autres = 'Autres'
+}
+
+export type ThemeImages = {
+  [key in Theme]: string;
+} & { [key: string]: string };
 
 @Component({
   selector: 'app-account',
@@ -16,7 +30,8 @@ export class AccountComponent implements OnInit {
     private router: Router, 
     private route: ActivatedRoute,
     private userService: UserService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private eventService: EventService
   ) {}
 
   @ViewChild('fileInput') fileInput!: ElementRef;
@@ -29,11 +44,24 @@ export class AccountComponent implements OnInit {
   img : any = { image : "" }  // Image pour l'avatar
   username: any;              // Nom d'utilisateur
 
+  events: IEvent[] = [];   // Liste d'event
+  favorites: any;
+  eventCreated : any;
+
   // Image utilisée dans l'affichage des events
   logo : any = {
     imageWidth : 130,
     imageTitle : "Image",
     image : "assets/images/logo.svg"
+  };
+
+  // Tableau contenant les chemins des images correspondant à chaque thème
+  themeImages: ThemeImages = {
+    [Theme.Sport]: 'assets/images/Sport.jpg',
+    [Theme.Culture]: 'assets/images/Culture.jpg',
+    [Theme.Festif]: 'assets/images/Festif.jpg',
+    [Theme.Pro]: 'assets/images/Pro.jpg',
+    [Theme.Autres]: 'assets/images/Autres.jpg'
   };
   
   
@@ -51,6 +79,16 @@ export class AccountComponent implements OnInit {
     this.fetchProfile();
     this.route.params.subscribe(params => {
       this.username = params['username'];
+    });
+
+    this.eventService.getAllEvents().subscribe(events => {
+      this.events = events;
+    });
+
+
+    this.eventService.getEventFavorite().subscribe(favorites => {
+      this.favorites = favorites;
+      this.eventCreated = favorites.filter((event: { owner: any; }) => event.owner === this.userInfo._id);
     });
   }
 
@@ -71,9 +109,15 @@ export class AccountComponent implements OnInit {
   }
 
   // Méthode pour afficher / cacher events
-  isVisible: boolean = false;
-  toggleVisibility(): void {
-    this.isVisible = !this.isVisible;
+  isEventFavoriVisible: boolean = false;
+  displayEventsFavorite(): void {
+    this.isEventFavoriVisible = !this.isEventFavoriVisible;
+  }
+
+  // Méthode pour afficher / cacher events
+  isEventCreatedVisible: boolean = false;
+  displayEventsCreated(): void {
+    this.isEventCreatedVisible = !this.isEventCreatedVisible;
   }
 
   // Méthode pour accéder à l'explorateur de fichier et sélectionner un nouvel avatar

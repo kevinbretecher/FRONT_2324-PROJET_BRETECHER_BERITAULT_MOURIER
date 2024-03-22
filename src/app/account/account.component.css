@@ -52,12 +52,11 @@ body {
 
   .form-group {
     margin: 20px;
-    width: 100%;
   }
 
   label {
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 50px;
     color: #ffffff;
     font-size: 1em;
     text-decoration: underline;
@@ -119,7 +118,6 @@ body {
 
   #listEventCreated, #listEventFav{
     background-color: #3F5569;
-    margin-right: 8%;
   }
 
   .textNoEvent{
@@ -153,6 +151,14 @@ body {
   margin: auto; 
   display: flex; 
   align-items: center; 
-  margin-left: 10px; 
+  margin: 10px;
   margin-right: 50px;
+}
+
+.sort-button{
+  border: 0px; 
+  background-color: #EBE9D6; 
+  color: black; 
+  align-items: center; 
+  padding: 0px;
 }

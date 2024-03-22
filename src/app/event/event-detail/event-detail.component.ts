@@ -23,11 +23,27 @@ export class EventDetailComponent {
 
   /*********** Variables ***********/
 
-  eventInfo: any = {};        // Pour stocker les informations de l'event
-  img : any = { image : "" }  // Image pour l'avatar
-  username: any;              // Nom d'utilisateur
-  eventId!: string;
-  
+  username: any;                                                             // Nom d'utilisateur
+  eventId!: string;                                                          // Id de l'event
+  favorites: any;
+
+  eventInfo: any = {};                                                       // Pour stocker les informations de l'event
+  name = '';                                                                 // Nom de l'event
+  date = '';                                                                 // Date de l'event
+  theme!: 'Sport' | 'Culture' | 'Festif' | 'Pro' | 'Autres';                 // Thème de l'event
+  price = '';                                                                // Prix de l'event
+
+  buttonClicked: boolean = false;
+
+  // Tableau contenant les chemins des images correspondant à chaque thème
+  themeImages = {
+    Sport: 'assets/images/Sport.jpg',
+    Culture: 'assets/images/Culture.jpg',
+    Festif: 'assets/images/Festif.jpg',
+    Pro: 'assets/images/Pro.jpg',
+    Autres: 'assets/images/Autres.jpg'
+};
+
 
 
   /*********** Méthodes ***********/
@@ -51,14 +67,40 @@ export class EventDetailComponent {
   getEventDetails(eventId: string): void {
     this.eventService.getEventById(eventId).subscribe({
       next: (response) => {
+        this.favorites = response.favoritedUsers.map((event: { username: any; }) => event.username);
         this.eventInfo = response;
+        this.name = response.name;
+        this.date = response.date;
+        this.theme = response.theme;
+        this.price = response.price;
       },
       error: () => {
-        this.snackBar.open('Un problème est survenu lors du chargement de votre profil', 'Fermer', {
+        this.snackBar.open('Un problème est survenu lors du chargement de votre profil.', 'Fermer', {
           duration: 5000,
           verticalPosition: 'top'
         });
       }
     });
+  }
+
+  // Méthode pour ajouter un évènement à ses favoris
+  addEventInFavorite(eventId: string): void {
+    this.buttonClicked = true;
+
+    this.eventService.addEventFavorite(eventId).subscribe({
+      next: (response) => {
+        this.eventInfo = response;
+        this.snackBar.open('L\'événement a été ajouté à vos favoris !', 'Fermer', {
+          duration: 5000,
+          verticalPosition: 'top'
+        });
+      },
+      error: () => {
+        this.snackBar.open('Un problème est survenu lors de l\'ajout en favori.', 'Fermer', {
+          duration: 5000,
+          verticalPosition: 'top'
+        });
+      }
+    })
   }
 }
